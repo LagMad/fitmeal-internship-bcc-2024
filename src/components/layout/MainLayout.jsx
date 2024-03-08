@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "../shared/Navbar";
+import Footer from "../shared/Footer";
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="min-h-screen w-full bg-white py-20 text-black">
+    <div className="bg-white pt-16 text-black font-Poppins">
       <Navbar />
       {children}
+      <Footer/>
     </div>
   );
 };

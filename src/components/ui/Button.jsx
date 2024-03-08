@@ -6,17 +6,18 @@ const Button = ({
   className,
   disabled = false,
 }) => {
-  // STYLE LIST BUTTON
   const getButtonVariation = (variation) => {
     switch (variation) {
-      case "primary":
-        return "bg-white hover:bg-blue border rounded-xl border-blue text-blue hover:text-white";
-      case "secondary":
-        return "bg-dark-blue hover:bg-blue text-white";
-      case "tertiary-blue":
-        return " border border-blue hover:bg-dark-blue text-dark-blue hover:text-white";
-      case "tertiary-red":
-        return "border border-red-300 hover:bg-red-500 text-red-500 hover:text-white";
+      case "primary-rectangle":
+        return "py-2 md:py-2.5 px-3 md:px-8 bg-cust-orange-normal hover:bg-white rounded-xl text-white hover:text-cust-orange-normal rounded-lg border-white border-2 hover:border-2 hover:border-cust-orange-normal font-semibold";
+      case "secondary-rectangle":
+        return "py-2 md:py-2.5 px-3 md:px-8 bg-white hover:bg-cust-orange-normal text-cust-orange-normal hover:text-white rounded-lg font-semibold";
+      case "primary-round":
+        return "bg-cust-orange-normal hover:bg-white py-3 px-3 rounded-full text-white hover:text-cust-orange-normal border-transparent border-2 hover:border-2 hover:border-cust-orange-normal drop-shadow-lg";
+      case "secondary-round":
+        return "bg-white hover:bg-cust-orange-normal py-3 px-3 text-cust-orange-normal hover:text-white rounded-full";
+      case "tertiary-white":
+        return "bg-white text-cust-light-active hover:text-cust-orange-normal rounded-none hover:border-b-cust-orange-normal hover:border-b-2";
       default:
         return "";
     }
@@ -28,7 +29,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       className={`${getButtonVariation(variation)}
-       font-medium rounded-lg py-2 md:py-2.5 px-3 md:px-4 text-sm md:text-base transition-colors duration-300 ${className}`}
+       font-medium text-sm md:text-sm transition-colors duration-300 ${className}`}
     >
       {children}
     </button>
