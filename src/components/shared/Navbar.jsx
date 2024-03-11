@@ -4,7 +4,7 @@ import Button from "../ui/Button";
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 z-20 w-full h-20 flex justify-center items-center p-4 bg-white   font-Poppins">
+    <nav className="fixed top-0 left-0 z-50 w-full h-20 flex justify-center items-center p-4 bg-white   font-Poppins">
       <div className=" flex justify-between items-center w-screen px-3 md:px-5 2xl:w-[1440px] mx-5">
         <div className="flex w-1/6 font-RammettoOne text-cust-orange-normal items-center text-3xl">
           FitMeal
