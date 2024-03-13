@@ -12,7 +12,7 @@ export default {
         PlusJakartaSans: ['PlusJakartaSans'],
       },
       colors: {
-        'cust-orange-light': '#FA6815',
+        'cust-orange-light': '#FFF0E8',
         'cust-orange-light-hover': '#FEE8DC',
         'cust-orange-light-active': '#FDD0B6',
         'cust-orange-normal': '#FA6815',

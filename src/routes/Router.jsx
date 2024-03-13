@@ -8,7 +8,8 @@ import React, { useEffect } from "react";
 
 // Page
 import Home from "../pages/Home";
-// import LoginPage from "../pages/LoginPage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 // import SignupPage from "../pages/SignupPage";
 
 // export default Router;
@@ -17,6 +18,14 @@ const Router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
   },
 ]);
 

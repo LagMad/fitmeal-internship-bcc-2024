@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full h-20 flex justify-center items-center mx-36 bg-white font-Poppins">
-      <div className=" flex justify-between items-center w-screen px-3 md:px-5 2xl:w-[1440px] mx-5">
-        <div className="flex w-1/6 font-RammettoOne text-cust-orange-normal items-center text-3xl">
+    <nav className="fixed top-0 left-0 z-50 w-screen h-20 flex justify-between items-center px-36 bg-white font-Poppins">
+      <div className=" flex justify-between w-full items-center">
+        <a className="flex w-1/6 font-RammettoOne text-cust-orange-normal items-center text-3xl" href="/">
           FitMeal
-        </div>
+        </a>
         <div className="flex flex-row w-4/6 justify-center items-center gap-16">
           <Button
             type={"button"}
@@ -55,14 +57,14 @@ const Navbar = () => {
           <Button
             type={"button"}
             variation={"secondary-rectangle"}
-            onClick={console.log("Klik!")}
+            onClick={() => navigate("/register")}
           >
             Daftar
           </Button>
           <Button
             type={"button"}
             variation={"primary-rectangle"}
-            onClick={console.log("Klik!")}
+            onClick={() => navigate("/login")}
           >
             Masuk
           </Button>

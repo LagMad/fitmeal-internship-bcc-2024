@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <MainLayout>
       {/* Hero Section */}
-      <div className="flex flex-col w-full min-h-screen pt-10 font-Poppins bg-HeroSection bg-no-repeat bg-right">
+      <div className="flex flex-col w-full min-h-screen pt-10 font-Poppins bg-HeroSection bg-no-repeat bg-right px-16">
         <div className="w-1/2 ml-16 mt-16">
           <div className="text-cust-orange-normal font-semibold mb-6">
             Solusi Terbaik untuk Kamu
