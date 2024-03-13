@@ -48,6 +48,8 @@ export default {
         'Partnership1': "url('/src/assets/Partnership1.png')",
         'Partnership2': "url('/src/assets/Partnership2.png')",
         'Partnership3': "url('/src/assets/Partnership3.png')",
+        'PromoBG': "url('/src/assets/PromoBG.png')",
+        'PeoplePict': "url('/src/assets/PeoplePict.png')",
       }
     },
   },
