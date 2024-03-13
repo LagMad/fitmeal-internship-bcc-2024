@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import Instagram from "./../../assets/Instagram.svg"
 // import Twitter from "./../../assets/Twitter.svg"
 // import Tiktok from "./../../assets/Tiktok.svg"
-import SVGs from "./../../assets/SVGs.jsx";
+import SVGs from "./SVGs.jsx";
 import Button from "../ui/Button";
 
 const Footer = () => {
