@@ -248,7 +248,7 @@ const Home = () => {
       </div>
 
       {/* USER REVIEW */}
-      <div className="flex flex-row w-auto mx-32">
+      <div className="flex flex-row w-auto mx-32 mb-16">
         <div className="flex flex-col h-auto w-1/2 mr-16">
           <div className="h-1/2 text-cust-orange-normal font-bold text-7xl">
             Terpercaya oleh{" "}
