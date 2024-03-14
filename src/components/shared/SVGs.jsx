@@ -248,7 +248,7 @@ const Progress1 = () => {
         x2="338.333"
         y2="36.1"
         stroke="#FA6815"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="338.833" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect
@@ -269,7 +269,7 @@ const Progress1 = () => {
         x2="676.667"
         y2="36.1"
         stroke="#FA6815"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="677.167" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect
@@ -290,7 +290,7 @@ const Progress1 = () => {
         x2="1015"
         y2="36.1"
         stroke="#FA6815"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="1015.5" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect
@@ -323,9 +323,9 @@ const Progress2 = () => {
       <path
         d="M50.3333 27L32 45.3333L23.6666 37"
         stroke="white"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <line
         x1="74"
@@ -333,7 +333,7 @@ const Progress2 = () => {
         x2="339"
         y2="36.1"
         stroke="#52D812"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="339.5" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect x="339.5" y="0.5" width="72" height="73" rx="36" stroke="#FA6815" />
@@ -347,7 +347,7 @@ const Progress2 = () => {
         x2="677"
         y2="36.1"
         stroke="#FA6815"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="677.5" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect x="677.5" y="0.5" width="72" height="73" rx="36" stroke="#FA6815" />
@@ -361,7 +361,7 @@ const Progress2 = () => {
         x2="1015"
         y2="36.1"
         stroke="#FA6815"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="1015.5" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect
@@ -393,9 +393,9 @@ const Progress3 = () => {
       <path
         d="M50.3333 27L32 45.3333L23.6666 37"
         stroke="white"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <line
         x1="74"
@@ -403,7 +403,7 @@ const Progress3 = () => {
         x2="338.667"
         y2="36.1"
         stroke="#52D812"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect
         x="339.167"
@@ -424,9 +424,9 @@ const Progress3 = () => {
       <path
         d="M389 27L370.667 45.3333L362.333 37"
         stroke="white"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <line
         x1="412.667"
@@ -434,7 +434,7 @@ const Progress3 = () => {
         x2="677.333"
         y2="36.1"
         stroke="#52D812"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="677.833" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect
@@ -455,7 +455,7 @@ const Progress3 = () => {
         x2="1015"
         y2="36.1"
         stroke="#FA6815"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="1015.5" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect
@@ -487,9 +487,9 @@ const Progress4 = () => {
       <path
         d="M50.3333 27L32 45.3333L23.6666 37"
         stroke="white"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <line
         x1="74"
@@ -497,7 +497,7 @@ const Progress4 = () => {
         x2="338.333"
         y2="36.1"
         stroke="#52D812"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect
         x="338.833"
@@ -518,9 +518,9 @@ const Progress4 = () => {
       <path
         d="M388.667 27L370.333 45.3333L362 37"
         stroke="white"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <line
         x1="412.333"
@@ -528,7 +528,7 @@ const Progress4 = () => {
         x2="676.667"
         y2="36.1"
         stroke="#52D812"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect
         x="677.167"
@@ -549,9 +549,9 @@ const Progress4 = () => {
       <path
         d="M727 27L708.667 45.3333L700.333 37"
         stroke="white"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <line
         x1="750.667"
@@ -559,7 +559,7 @@ const Progress4 = () => {
         x2="1015"
         y2="36.1"
         stroke="#52D812"
-        stroke-width="1.8"
+        strokeWidth="1.8"
       />
       <rect x="1015.5" y="0.5" width="72" height="73" rx="36" fill="#FA6815" />
       <rect

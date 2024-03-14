@@ -32,13 +32,12 @@ const RegisterForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     try {
-      if (form.confirmpassword !== form.password) {
-        return alert("Konfirmasi password dan password tidak sama!");
-      }
-      const response = await handleRegister(form);
+      const response = await handleRegister(formData);
+
+      console.log(response);
 
       setTimeout(() => {
         navigate("/login");
@@ -49,10 +48,22 @@ const RegisterForm = () => {
   };
 
   const BoxList = [
-    <Register1 nextStep={handleNextStep} Form={formData}/>,
-    <Register2 nextStep={handleNextStep} />,
-    <Register3 nextStep={handleNextStep} />,
-    <Register4 />,
+    <Register1
+      nextStep={handleNextStep}
+      Form={formData}
+      setForm={setFormData}
+    />,
+    <Register2
+      nextStep={handleNextStep}
+      Form={formData}
+      setForm={setFormData}
+    />,
+    <Register3
+      nextStep={handleNextStep}
+      Form={formData}
+      setForm={setFormData}
+    />,
+    <Register4 onSubmit={handleSubmit} Form={formData} setForm={setFormData} />,
   ];
 
   return (
