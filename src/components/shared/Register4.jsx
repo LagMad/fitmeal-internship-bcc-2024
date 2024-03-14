@@ -3,7 +3,7 @@ import SVGs from "./SVGs";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 
-const Register4 = ({nextStep}) => {
+const Register4 = () => {
   return (
     <div className="flex flex-col w-full justify-center items-center self-center gap-20 mb-16">
       <SVGs.Progress4/>

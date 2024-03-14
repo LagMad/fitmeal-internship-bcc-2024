@@ -12,8 +12,8 @@ const Register1 = ({ nextStep }) => {
   return (
     <div className="flex flex-col w-full justify-center items-center self-center gap-20 mb-16">
       <SVGs.Progress1 />
-      <div className="flex flex-col text-cust-orange-normal font-bold w-1/3 text-center text-4xl gap-8">
-        <div>Seberapa sibuk aktivitas kamu dalam sehari?</div>
+      <div className="text-cust-orange-normal font-bold w-1/3 text-center text-4xl">Seberapa sibuk aktivitas kamu dalam sehari?</div>
+      <form className="flex flex-col text-cust-orange-normal font-bold w-1/3 text-center text-4xl gap-8">
         <label className="w-full" style={{ cursor: "pointer" }}>
           <div className={`text-left rounded-xl border-2 border-cust-orange-normal p-3 ${isChecked === "not_busy" ? "bg-cust-orange-normal" : "bg-white"}`}>
             <input
@@ -21,7 +21,7 @@ const Register1 = ({ nextStep }) => {
               type="radio"
               name="activityLevel"
               value="not_busy"
-              onChange={() => handleChange("not_busy")}
+              onChange={(e) => (handleChange("not_busy"), setForm({ ...form, email: e.target.value }))}
             />
             <div className={`z-10 relative text-xl ${isChecked === "not_busy" ? "text-white" : "text-cust-orange-normal"}`}>
               Tidak Terlalu Sibuk
@@ -87,7 +87,7 @@ const Register1 = ({ nextStep }) => {
         </label>
 
         <Button type={"button"} variation={"primary-rectangle"} onClick={nextStep}>Lanjut</Button>
-      </div>
+      </form>
     </div>
   );
 };

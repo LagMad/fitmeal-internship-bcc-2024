@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 import Home from "../pages/Home";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import LacakNutrisi from "../pages/LacakNutrisi";
 // import SignupPage from "../pages/SignupPage";
 
 // export default Router;
@@ -26,6 +27,10 @@ const Router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "/lacaknutrisi",
+    element: <LacakNutrisi />,
   },
 ]);
 
