@@ -113,13 +113,13 @@ const LacakNutrisi = ({ data = {} }) => {
           </div>
           <div className="flex flex-row gap-5">
             <div className="flex flex-col bg-white drop-shadow-xl h-fit rounded-lg px-5 py-7 gap-10">
-              <button>
+              <button onClick={() => navigate("/lacaknutrisi")}>
                 <SVGs.Menu />
               </button>
               <button>
                 <SVGs.RencanaMakan />
               </button>
-              <button>
+              <button onClick={() => navigate("/dashboard")}>
                 <SVGs.ProfileDashboard />
               </button>
             </div>
