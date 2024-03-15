@@ -14,15 +14,15 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: "",
+    userName: "",
     email: "",
     password: "",
     aktivitas: "",
     gender: "",
-    umur: "",
+    umur: 0,
     alamat: "",
-    beratbadan: "",
-    tinggibadan: "",
+    beratBadan: 0,
+    tinggiBadan: 0,
   });
 
   const [currentStep, setCurrentStep] = useState(0);

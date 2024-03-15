@@ -1,4 +1,7 @@
 import React from "react";
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+
 import MainLayout from "../components/layout/MainLayout";
 import Button from "../components/ui/Button";
 import SVGs from "../components/shared/SVGs";
@@ -8,11 +11,14 @@ import Platter3 from "../assets/Platter3.png";
 import PhotoProfile from "../assets/PhotoProfile.png";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuth();
+
   return (
     <MainLayout>
       {/* Hero Section */}
-      <div className="flex flex-col w-full min-h-screen pt-10 font-Poppins bg-HeroSection bg-no-repeat bg-right px-16">
-        <div className="w-1/2 ml-16 mt-16">
+      <div className="flex flex-col w-full min-h-screen pt-10 font-Poppins bg-HeroSection bg-no-repeat overflow-auto">
+        <div className="w-1/2 ml-16 mt-16 px-16">
           <div className="text-cust-orange-normal font-semibold mb-6">
             Solusi Terbaik untuk Kamu
           </div>
@@ -29,17 +35,61 @@ const Home = () => {
             <p>maksimal</p>
           </div>
           <button className="group flex flex-row justify-start items-center gap-7 mt-10">
-            <Button
-              className="group"
-              type={"button"}
-              variation={"primary-rectangle"}
-              onClick={console.log("Klik!")}
-            >
-              Ayo Mulai
-            </Button>
-            <SVGs.RightArrow width={20} height={18} className="group" />
+            {isAuthenticated ? (
+              <Button type={"button"} variation={"primary-rectangle"}>
+                Atur Rencana Makan
+              </Button>
+            ) : (
+              <>
+                <Button
+                  className="group"
+                  type={"button"}
+                  variation={"primary-rectangle"}
+                >
+                  Ayo Mulai
+                </Button>
+                <SVGs.RightArrow width={20} height={18} className="group" />
+              </>
+            )}
           </button>
         </div>
+        {isAuthenticated ? (
+          <div className="flex relative w-full h-32 mt-48 bg-cust-orange-normal justify-center items-center mb-16">
+            <div className="flex flex-col absolute w-9/12 -top-20 bg-cust-green-normal text-white justify-center items-center py-5 rounded-xl gap-5">
+              <div className="font-bold text-4xl">Nutrisi Harian Kamu</div>
+              <div className="flex flex-row justify-between items-center gap-10">
+                <div className="flex flex-row font-bold text-xl justify-between gap-5">
+                  Kalori
+                  <div className="font-normal text-[16px]">2000 Kal</div>
+                </div>
+                <hr className="border-[1px] border-white h-16" />
+                <div className="flex flex-row font-bold text-xl justify-between gap-5">
+                  Protein
+                  <div className="font-normal text-[16px]">49 gram</div>
+                </div>
+                <hr className="border-[1px] border-white h-16" />
+                <div className="flex flex-row font-bold text-xl justify-between gap-5">
+                  Karbohidrat
+                  <div className="font-normal text-[16px]">325 gram</div>
+                </div>
+                <hr className="border-[1px] border-white h-16" />
+                <div className="flex flex-row font-bold text-xl justify-between gap-5">
+                  Lemak
+                  <div className="font-normal text-[16px]">44 gram</div>
+                </div>
+                <Button
+                  className={"bg-cust-orange-normal hover:bg-cust-green-normal my-custom-class"}
+                  type={"button"}
+                  variation={"primary-rectangle"}
+                >
+                  Detail
+                </Button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       {/* INFORMASI NUTRISI */}
@@ -56,11 +106,11 @@ const Home = () => {
             Lihat Lebih Banyak
           </Button>
           <div className="flex flex-row w-full gap-8 justify-center items-center">
-            <div className="flex relative bg-FruitCard bg-no-repea bg-cover w-80 h-80 justify-start items-end rounded-2xl overflow-hidden">
+            <div className="flex relative bg-FruitCard bg-no-repea bg-cover w-80 h-80 justify-start items-end rounded-2xl overflow-hidden z-0">
               <div className="absolute w-full h-full bg-gradient-to-t from-[#52D812] from-10% to-transparent to-40% z-10" />
               <p className="pl-7 pb-7 z-20">Fruit</p>
             </div>
-            <div className="flex relative bg-VegetablesCard bg-no-repea bg-cover w-80 h-80 justify-start items-end rounded-2xl overflow-hidden">
+            <div className="flex relative bg-VegetablesCard bg-no-repeat bg-cover w-80 h-80 justify-start items-end rounded-2xl overflow-hidden">
               <div className="absolute w-full h-full bg-gradient-to-t from-[#52D812] from-10% to-transparent to-40% z-10 rounded-xl" />
               <p className="pl-7 pb-7 z-20">Vegetables</p>
             </div>
@@ -224,7 +274,7 @@ const Home = () => {
       <div className="flex flex-row bg-cust-orange-normal bg-PromoBG bg-no-repeat bg-right w-auto h-auto rounded-xl text-white px-12 py-8 mx-36 my-16 gap-16">
         <div className="w-1/3 flex flex-col gap-8 my-3">
           <div className="font-normal text-7xl flex-row justify-end items-end  ">
-            <span className="font-bold text-8xl">50%</span>{" "}off
+            <span className="font-bold text-8xl">50%</span> off
           </div>
           <div className=" text-cust-black-light-hover">
             Berlaku s/d 19 Maret 2024
@@ -256,8 +306,8 @@ const Home = () => {
           </div>
 
           <div className="flex flex-row h-1/2 justify-start items-start gap-20">
-            <SVGs.LeftArrow width={36} height={32}/>
-            <SVGs.RightArrow width={36} height={32}/>
+            <SVGs.LeftArrow width={36} height={32} />
+            <SVGs.RightArrow width={36} height={32} />
           </div>
         </div>
         <div className="flex w-1/2">

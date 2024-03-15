@@ -35,6 +35,7 @@ const Register2 = ({ nextStep, Form, setForm }) => {
                 value="male"
                 checked={isChecked === "male"}
                 onChange={() => handleChange("male")}
+                required
               />
               <div
                 className={`w-6 h-6 border-cust-orange-normal rounded-full ${
@@ -55,6 +56,7 @@ const Register2 = ({ nextStep, Form, setForm }) => {
                 value="female"
                 checked={isChecked === "female"}
                 onChange={() => handleChange("female")}
+                required
               />
               <div
                 className={`w-6 h-6 border-cust-orange-normal rounded-full ${
@@ -70,7 +72,8 @@ const Register2 = ({ nextStep, Form, setForm }) => {
             <Input
               className={"w-full"}
               name={"umur"}
-              onChange={(e) => setForm({ ...Form, umur: e.target.value })}
+              onChange={(e) => setForm({ ...Form, umur: parseInt(e.target.value) })}
+              required
             />
           </div>
           <div className="flex flex-col gap-7 font-bold text-2xl text-cust-orange-normal w-7/12 text-center">
@@ -81,6 +84,7 @@ const Register2 = ({ nextStep, Form, setForm }) => {
               onChange={(e) =>
                 setForm({ ...Form, alamat: e.target.value })
               }
+              required
             />
           </div>
         </div>

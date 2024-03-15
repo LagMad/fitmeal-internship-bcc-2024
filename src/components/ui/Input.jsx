@@ -1,16 +1,18 @@
 import React from "react";
 
 const Input = ({
+  children,
   type = "text",
   name,
   className,
   onChange,
   value,
   placeholder,
+  readOnly,
   required = false,
 }) => {
   return (
-    <div className="w-full group">
+    <div className="flex relative w-full group">
       <input
         type={type}
         name={name}
@@ -19,8 +21,10 @@ const Input = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        readOnly={readOnly}
         required={required}
       />
+      {children}
     </div>
   );
 };

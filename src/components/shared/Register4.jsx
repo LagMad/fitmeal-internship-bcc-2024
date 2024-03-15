@@ -4,6 +4,11 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 
 const Register4 = ({ onSubmit, Form, setForm }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSubmit = () => {
     onSubmit(Form);
   };
@@ -20,7 +25,7 @@ const Register4 = ({ onSubmit, Form, setForm }) => {
           <Input
             className={"font-normal"}
             placeholder={"Masukkan username kamu"}
-            onChange={(e) => setForm({ ...Form, name: e.target.value })}
+            onChange={(e) => setForm({ ...Form, userName: e.target.value })}
           />
         </div>
         <div className="flex flex-col text-left text-cust-orange-normal font-bold w-7/12 gap-3">
@@ -35,10 +40,19 @@ const Register4 = ({ onSubmit, Form, setForm }) => {
           Password
           <Input
             className={"font-normal"}
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder={"Masukkan password kamu"}
             onChange={(e) => setForm({ ...Form, password: e.target.value })}
-          />
+          >
+            <button
+              className={
+                "absolute right-5 top-2 text-cust-orange-normal font-bold"
+              }
+              onClick={togglePasswordVisibility}
+            >
+              show
+            </button>
+          </Input>
         </div>
         <Button
           className={"w-7/12"}

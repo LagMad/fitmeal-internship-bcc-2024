@@ -1,12 +1,29 @@
 import { axiosInstance } from "../coreApi";
 
+// const handleLogin = async (body) => {
+//   try {
+//     const response = await axiosInstance.post("v1/user/login", {
+//       email: body.email,
+//       password: body.password,
+//     });
+
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
 const handleLogin = async (body) => {
   try {
-    const response = await axiosInstance.post("user", {
-      username: body.username,
+    const response = await axiosInstance.post("v1/user/login", {
+      email: body.email,
       password: body.password,
     });
 
+    const { token, id } = response.data; // Extracting userId from response
+    window.localStorage.setItem(  'token', token);
+    window.localStorage.setItem('userId', response.data.data.id); // Storing userId in localStorage
+    console.log(response.data.data.id)
     return response.data;
   } catch (error) {
     throw error;
@@ -15,16 +32,16 @@ const handleLogin = async (body) => {
 
 const handleRegister = async (body) => {
   try {
-    const response = await axiosInstance.post("user", {
-      name: body.name,
+    const response = await axiosInstance.post("v1/user/register", {
+      userName: body.userName,
       email: body.email,
       password: body.password,
       aktivitas: body.aktivitas,
       gender: body.gender,
       umur: body.umur,
       alamat: body.alamat,
-      beratbadan: body.beratbadan,
-      tinggibadan: body.tinggibadan,
+      beratBadan: body.beratBadan,
+      tinggiBadan: body.tinggiBadan,
     });
 
     return response.data;

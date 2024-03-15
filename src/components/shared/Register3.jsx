@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SVGs from "./SVGs";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
@@ -14,11 +14,11 @@ const Register3 = ({nextStep, Form, setForm}) => {
       <div className="flex flex-col justify-center items-center w-5/12 gap-10">
         <div className="flex flex-col gap-7 font-bold text-2xl text-cust-orange-normal w-7/12 text-center">
           Berapa berat badan kamu?
-          <Input className={"w-full"} placeholder={"*kg"} onChange={(e) => setForm({ ...Form, beratbadan: e.target.value})}/>
+          <Input className={"w-full"} placeholder={"*kg"} onChange={(e) => setForm({ ...Form, beratBadan: parseInt(e.target.value)})} required/>
         </div>
         <div className="flex flex-col gap-7 font-bold text-2xl text-cust-orange-normal w-7/12 text-center">
           Berapa tinggi badan kamu?
-          <Input className={"w-full"} placeholder={"*cm"} onChange={(e) => setForm({ ...Form, tinggibadan: e.target.value})}/>
+          <Input className={"w-full"} placeholder={"*cm"} onChange={(e) => setForm({ ...Form, tinggiBadan: parseInt(e.target.value)})} required/>
         </div>
         <Button
           type={"button"}

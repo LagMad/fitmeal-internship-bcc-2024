@@ -41,7 +41,7 @@ const FooterALT = ({ position }) => {
   const custOrange = "cust-orange-sosmed";
 
   return (
-    <div className="flex flex-col w-full h-auto bg-cust-orange-normal font-Poppins text-white justify-center items-center px-32 pt-0 sm:pt-12 pb-5 drop-shadow-2xl z-30">
+    <div className="flex flex-col w-full h-auto bg-cust-orange-normal font-Poppins text-white justify-center items-center px-32 pt-0 sm:pt-12 pb-5 drop-shadow-2xl z-10">
       <div className="flex flex-row w-full">
         <div className={`flex w-full flex-col gap-5 ${logoPosition(position)}`}>
           <a className="font-RammettoOne text-3xl" href="/">FitMeal</a>

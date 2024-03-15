@@ -50,6 +50,7 @@ export default {
         'Partnership3': "url('/src/assets/Partnership3.png')",
         'PromoBG': "url('/src/assets/PromoBG.png')",
         'PeoplePict': "url('/src/assets/PeoplePict.png')",
+        'ProfileHeader': "url('/src/assets/ProfileHeader.png')",
       }
     },
   },
