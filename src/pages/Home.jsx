@@ -36,8 +36,8 @@ const Home = () => {
           </div>
           <button className="group flex flex-row justify-start items-center gap-7 mt-10">
             {isAuthenticated ? (
-              <Button type={"button"} variation={"primary-rectangle"}>
-                Atur Rencana Makan
+              <Button type={"button"} variation={"primary-rectangle"} onClick={() => navigate("/lacaknutrisi")}>
+                Lacak Nutrisi
               </Button>
             ) : (
               <>
@@ -45,10 +45,10 @@ const Home = () => {
                   className="group"
                   type={"button"}
                   variation={"primary-rectangle"}
+                  onClick={() => navigate("/register")}
                 >
                   Ayo Mulai
                 </Button>
-                <SVGs.RightArrow width={20} height={18} className="group" />
               </>
             )}
           </button>
@@ -77,13 +77,6 @@ const Home = () => {
                   Lemak
                   <div className="font-normal text-[16px]">44 gram</div>
                 </div>
-                <Button
-                  className={"bg-cust-orange-normal hover:bg-cust-green-normal my-custom-class"}
-                  type={"button"}
-                  variation={"primary-rectangle"}
-                >
-                  Detail
-                </Button>
               </div>
             </div>
           </div>
