@@ -11,6 +11,7 @@ import Button from "../../components/ui/Button";
 import { getUserData } from "../../api/services/profile";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import NutrisiCard from "../../components/ui/NutrisiCard";
+import DashboardMenu from "../../components/shared/DashboardMenu";
 
 const LacakNutrisi = ({ data = {} }) => {
   const navigate = useNavigate();
@@ -112,17 +113,7 @@ const LacakNutrisi = ({ data = {} }) => {
             Lacak Nutrisi
           </div>
           <div className="flex flex-row gap-5">
-            <div className="flex flex-col bg-white drop-shadow-xl h-fit rounded-lg px-5 py-7 gap-10">
-              <button onClick={() => navigate("/lacaknutrisi")}>
-                <SVGs.Menu />
-              </button>
-              <button>
-                <SVGs.RencanaMakan />
-              </button>
-              <button onClick={() => navigate("/dashboard")}>
-                <SVGs.ProfileDashboard />
-              </button>
-            </div>
+            <DashboardMenu/>
             <div className="flex flex-row w-full h-fit gap-8 justify-center items-start">
               <div className="flex flex-col w-1/4 bg-white drop-shadow-xl rounded-lg h-fit px-8 py-8 gap-8">
                 <div className="flex flex-row justify-between items-center">

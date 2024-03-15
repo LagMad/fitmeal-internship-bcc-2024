@@ -27,9 +27,9 @@ const NavbarDashboard = () => {
         {/* NAVBAR */}
         <div className="flex flex-row w-full justify-center items-center py-5">
           <div className="flex flex-row w-full mx-32 drop-shadow-xl bg-white py-3 px-5 rounded-lg justify-between items-center">
-            <div className="flex w-1/2 font-RammettoOne text-cust-orange-normal text-4xl text-center">
+            <a className="flex w-1/2 font-RammettoOne text-cust-orange-normal text-4xl text-center" href="/">
               FitMeal
-            </div>
+            </a>
             <div className="flex flex-row w-1/2 justify-center items-center gap-10">
               <SearchBar />
               <hr className="border-[1.5px] border-cust-orange-normal h-10" />

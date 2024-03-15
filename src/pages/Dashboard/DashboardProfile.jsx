@@ -10,6 +10,7 @@ import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { getUserData } from "../../api/services/profile";
 import DashboardLayout from "../../components/layout/DashboardLayout";
+import DashboardMenu from "../../components/shared/DashboardMenu";
 import axios from "axios";
 
 const Dashboard = () => {
@@ -70,17 +71,7 @@ const Dashboard = () => {
             Profil
           </div>
           <div className="flex flex-row gap-5">
-            <div className="flex flex-col bg-white drop-shadow-xl h-fit rounded-lg px-5 py-7 gap-10">
-              <button onClick={() => navigate("/lacaknutrisi")}>
-                <SVGs.Menu />
-              </button>
-              <button>
-                <SVGs.RencanaMakan />
-              </button>
-              <button onClick={() => navigate("/dashboard")}>
-                <SVGs.ProfileDashboard />
-              </button>
-            </div>
+            <DashboardMenu />
             <div className="flex flex-col w-full h-fit">
               <div className="flex w-full h-40 bg-ProfileHeader bg-top bg-no-repeat bg-cover" />
               <div className="flex flex-row w-full mt-3 px-20">
