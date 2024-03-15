@@ -21,6 +21,22 @@ const Dashboard = () => {
     useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState([]);
+  const alamatOptions = [
+    { value: "sigura-gura", label: "Sigura-gura" },
+    { value: "sumbersari", label: "Sumbersari" },
+    { value: "dewandaru", label: "Dewandaru" },
+  ];
+  const [formData, setFormData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+    aktivitas: "",
+    gender: "",
+    umur: 0,
+    alamat: "",
+    beratBadan: 0,
+    tinggiBadan: 0,
+  });
 
   const toggleLogOutPopup = () => {
     setLogoutPopupVisible(!isLogoutPopupVisible);
@@ -143,7 +159,7 @@ const Dashboard = () => {
               </div>
               <div className="flex flex-row w-full justify-between">
                 <div className="flex flex-col w-1/2 justify-start items-start gap-10">
-                <div className="flex flex-col gap-5 justify-start items-start w-full">
+                  <div className="flex flex-col gap-5 justify-start items-start w-full">
                     <div className="font-bold text-lg text-cust-orange-normal w-10/12">
                       Username
                     </div>
@@ -276,33 +292,55 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-row w-full justify-between">
               <div className="flex flex-col w-1/2 justify-start items-start gap-10">
-                <div className="flex flex-col w-full gap-5 justify-start">
-                  <div className="font-bold text-lg text-cust-orange-normal">
+                <div className="flex flex-col gap-5 justify-start items-start w-full">
+                  <div className="font-bold text-lg text-cust-orange-normal w-10/12">
                     Username
                   </div>
-                  <Input
-                    className="w-10/12"
-                    type="text"
-                    name="username"
-                    value=""
-                  />
+                  <div className="flex justify-start w-full">
+                    <div className="w-10/12">
+                      <Input
+                        className="w-full"
+                        type="text"
+                        name="userName"
+                        value=""
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="flex flex-col w-full gap-5 justify-start">
-                  <div className="font-bold text-lg text-cust-orange-normal">
+                <div className="flex flex-col gap-5 justify-start items-start w-full">
+                  <div className="font-bold text-lg text-cust-orange-normal w-10/12">
                     Email
                   </div>
-                  <Input
-                    className="w-10/12"
-                    type="text"
-                    name="email"
-                    value=""
-                  />
-                </div>
-                <div className="flex flex-col w-full gap-5 justify-start">
-                  <div className="font-bold text-lg text-cust-orange-normal">
-                    Kota
+                  <div className="flex justify-start w-full">
+                    <div className="w-10/12">
+                      <Input
+                        className="w-full"
+                        type="text"
+                        name="email"
+                        value=""
+                      />
+                    </div>
                   </div>
-                  <Input className="w-10/12" type="text" name="kota" value="" />
+                </div>
+                <div className="flex flex-col gap-5 justify-start items-start w-full">
+                  <div className="font-bold text-lg text-cust-orange-normal w-10/12">
+                    Tempat Tinggal
+                  </div>
+                  <div className="flex justify-start w-full">
+                    <div className="w-10/12">
+                      <Input
+                        className="w-10/12"
+                        type="select"
+                        name="alamat"
+                        value={formData.alamat}
+                        placeholder="Pilih daerah kamu"
+                        options={alamatOptions}
+                        onChange={(e) =>
+                          setFormData({ ...formData, alamat: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col w-1/2 gap-10">
