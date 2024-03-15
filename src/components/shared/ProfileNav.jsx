@@ -23,6 +23,7 @@ const ProfileNav = () => {
   const handleLogout = (e) => {
     // e.preventDefault();
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("userId");
     window.location.reload();
   };
 

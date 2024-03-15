@@ -5,6 +5,11 @@ import Input from "../ui/Input";
 
 const Register2 = ({ nextStep, Form, setForm }) => {
   const [isChecked, setIsChecked] = useState("");
+  const alamatOptions = [
+    { value: "sigura-gura", label: "Sigura-gura" },
+    { value: "sumbersari", label: "Sumbersari" },
+    { value: "dewandaru", label: "Dewandaru" },
+  ];
 
   const handleChange = (value) => {
     setIsChecked((prevValue) => (prevValue === value ? "" : value));
@@ -15,8 +20,19 @@ const Register2 = ({ nextStep, Form, setForm }) => {
     nextStep();
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent default form submission behavior
+      handleNextStep();
+    }
+  };
+
   return (
-    <div className="flex flex-col w-full justify-center items-center self-center gap-20 mb-16">
+    <div
+      className="flex flex-col w-full h-screen justify-start items-center self-center gap-20 my-10"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
       <SVGs.Progress2 />
       <div className="flex flex-col justify-center items-center w-5/12 gap-10">
         <div className="flex flex-col w-full justify-center items-center gap-7">
@@ -72,19 +88,23 @@ const Register2 = ({ nextStep, Form, setForm }) => {
             <Input
               className={"w-full"}
               name={"umur"}
-              onChange={(e) => setForm({ ...Form, umur: parseInt(e.target.value) })}
+              onChange={(e) =>
+                setForm({ ...Form, umur: parseInt(e.target.value) })
+              }
               required
             />
           </div>
           <div className="flex flex-col gap-7 font-bold text-2xl text-cust-orange-normal w-7/12 text-center">
             Di mana tempat tinggalmu?
             <Input
+              type="select"
               className={"w-full"}
               name={"alamat"}
-              onChange={(e) =>
-                setForm({ ...Form, alamat: e.target.value })
-              }
+              value={Form.alamat}
+              onChange={(e) => setForm({ ...Form, alamat: e.target.value })}
               required
+              placeholder="Pilih daerah kamu"
+              options={alamatOptions}
             />
           </div>
         </div>

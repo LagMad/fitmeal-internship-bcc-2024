@@ -8,8 +8,16 @@ const Register3 = ({nextStep, Form, setForm}) => {
     nextStep();
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent default form submission behavior
+      handleNextStep();
+    }
+  };
+
   return (
-    <div className="flex flex-col w-full justify-center items-center self-center gap-20 mb-16">
+    <div className="flex flex-col w-full h-screen justify-start items-center self-center gap-20 my-10" onKeyDown={handleKeyDown}
+    tabIndex={0}>
       <SVGs.Progress3 />
       <div className="flex flex-col justify-center items-center w-5/12 gap-10">
         <div className="flex flex-col gap-7 font-bold text-2xl text-cust-orange-normal w-7/12 text-center">

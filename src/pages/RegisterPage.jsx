@@ -4,7 +4,7 @@ import RegisterForm from '../components/auth/RegisterForm';
 
 const RegisterPage = () => {
   return (
-    <div className='flex flex-col items-center mt-16 font-Poppins'>
+    <div className='flex flex-col items-center font-Poppins'>
         <RegisterForm/>
         <FooterALT position={"left"}/>
     </div>

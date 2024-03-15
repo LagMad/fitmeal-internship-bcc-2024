@@ -16,6 +16,7 @@ const NavbarDashboard = () => {
   const handleLogout = (e) => {
     // e.preventDefault();
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("userId");
     setTimeout(() => {
       navigate("/");
     }, 1000);

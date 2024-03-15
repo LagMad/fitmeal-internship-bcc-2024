@@ -3,7 +3,7 @@ import SVGs from "./SVGs";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
 
-const Register4 = ({ onSubmit, Form, setForm }) => {
+const Register4 = ({ onSubmit, Form, setForm, errorMsg }) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -13,8 +13,19 @@ const Register4 = ({ onSubmit, Form, setForm }) => {
     onSubmit(Form);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent default form submission behavior
+      handleSubmit();
+    }
+  };
+
   return (
-    <div className="flex flex-col w-full justify-center items-center self-center gap-20 mb-16">
+    <div
+      className="flex flex-col w-full h-screen justify-start items-center self-center gap-20 my-10"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
       <SVGs.Progress4 />
       <div className="flex flex-col justify-center items-center w-5/12 gap-10">
         <div className="font-bold text-4xl text-cust-orange-normal ">
@@ -71,6 +82,7 @@ const Register4 = ({ onSubmit, Form, setForm }) => {
             Masuk
           </a>
         </div>
+        <div className=" text-red-500 font-bold">{errorMsg && <p>{errorMsg}</p>}</div>
       </div>
     </div>
   );

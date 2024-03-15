@@ -12,6 +12,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import LacakNutrisi from "../pages/Dashboard/LacakNutrisi";
 import Dashboard from "../pages/Dashboard/DashboardProfile";
+import RencanaMakan from "../pages/Dashboard/RencanaMakan";
 // import SignupPage from "../pages/SignupPage";
 
 // export default Router;
@@ -32,6 +33,10 @@ const Router = createBrowserRouter([
   {
     path: "/lacaknutrisi",
     element: <LacakNutrisi />,
+  },
+  {
+    path: "/rencanamakan",
+    element: <RencanaMakan />,
   },
   {
     path: "/dashboard",

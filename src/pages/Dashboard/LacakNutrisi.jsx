@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import FooterALT from "../../components/shared/FooterALT";
-import PhotoProfile from "../../assets/PhotoProfile.png";
 import SVGs from "../../components/shared/SVGs";
-import SearchBar from "../../components/ui/SearchBar";
-import Dialogue from "../../components/ui/Dialogue";
-import PhotoProfileDummy from "../../assets/PhotoProfileDummy.png";
-import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import { getUserData } from "../../api/services/profile";
 import DashboardLayout from "../../components/layout/DashboardLayout";

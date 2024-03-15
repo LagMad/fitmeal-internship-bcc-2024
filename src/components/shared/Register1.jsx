@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import SVGs from "./SVGs";
 import Button from "../ui/Button";
 
-
 const Register1 = ({ nextStep, Form, setForm }) => {
   const [isChecked, setIsChecked] = useState("");
 
@@ -15,13 +14,27 @@ const Register1 = ({ nextStep, Form, setForm }) => {
     nextStep();
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevent default form submission behavior
+      handleNextStep();
+    }
+  };
+
   return (
-    <div className="flex flex-col w-full justify-center items-center self-center gap-20 mb-16">
+    <div
+      className="flex flex-col w-full h-screen justify-start items-center self-center gap-10 my-10 "
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
       <SVGs.Progress1 />
       <div className="text-cust-orange-normal font-bold w-1/3 text-center text-4xl">
         Seberapa sibuk aktivitas kamu dalam sehari?
       </div>
-      <form className="flex flex-col text-cust-orange-normal font-bold w-1/3 text-center text-4xl gap-8">
+      <form
+        className="flex flex-col text-cust-orange-normal font-bold w-1/3 text-center text-4xl gap-8"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <label className="w-full" style={{ cursor: "pointer" }}>
           <div
             className={`text-left rounded-xl border-2 border-cust-orange-normal p-3 ${
@@ -175,7 +188,6 @@ const Register1 = ({ nextStep, Form, setForm }) => {
           variation={"primary-rectangle"}
           onClick={() => {
             handleNextStep();
-            console.log(Form);
           }}
         >
           Lanjut
