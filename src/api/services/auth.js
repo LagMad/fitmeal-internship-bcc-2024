@@ -23,7 +23,6 @@ const handleLogin = async (body) => {
     const { token, id } = response.data; // Extracting userId from response
     window.localStorage.setItem(  'token', response.data.data.token);
     window.localStorage.setItem('userId', response.data.data.id); // Storing userId in localStorage
-    console.log(response.data.data.token)
     return response.data;
   } catch (error) {
     throw error;

@@ -18,8 +18,6 @@ const Navbar = () => {
     try {
       
       const response = await getUserData();
-      console.log("ini data :", response.data);
-      console.log("ini username:", response.data.userName);
       setUserData(response.data);
     } catch (error) {
       throw error;

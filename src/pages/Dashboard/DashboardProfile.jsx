@@ -5,7 +5,11 @@ import Dialogue from "../../components/ui/Dialogue";
 import PhotoProfileDummy from "../../assets/PhotoProfileDummy.png";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import { editUserData, getUserData } from "../../api/services/profile";
+import {
+  changePassword,
+  editUserData,
+  getUserData,
+} from "../../api/services/profile";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import DashboardMenu from "../../components/shared/DashboardMenu";
 
@@ -25,7 +29,12 @@ const Dashboard = () => {
     alamat: "",
     beratBadan: 0,
     tinggiBadan: 0,
+    password: "",
   });
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const alamatOptions = [
     { value: "Sigura-gura", label: "Sigura-gura" },
@@ -38,6 +47,9 @@ const Dashboard = () => {
     alamat: "",
     beratBadan: 0,
     tinggiBadan: 0,
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
   });
 
   const toggleLogOutPopup = () => {
@@ -48,8 +60,20 @@ const Dashboard = () => {
     setPasswordPopupVisible(!isPasswordPopupVisible);
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const togglePasswordVisibility = (inputName) => {
+    switch (inputName) {
+      case "oldPassword":
+        setShowOldPassword(!showOldPassword);
+        break;
+      case "newPassword":
+        setShowNewPassword(!showNewPassword);
+        break;
+      case "confirmPassword":
+        setShowConfirmPassword(!showConfirmPassword);
+        break;
+      default:
+        break;
+    }
   };
 
   const togglePasswordSuccessPopup = () => {
@@ -64,7 +88,7 @@ const Dashboard = () => {
     setUbahStatusPopupVisible(!isUbahStatusPopupVisible);
   };
 
-  const handleLogout = (e) => {
+  const handleLogout = () => {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userId");
     navigate("/");
@@ -75,33 +99,13 @@ const Dashboard = () => {
       const response = await getUserData();
       setUserData(response.data);
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   };
 
   useEffect(() => {
     getUser();
   }, []);
-
-  const handleEdit = async (e) => {
-    try {
-      const editedUserData = {
-        ...formData,
-        umur: parseInt(formData.umur),
-        beratBadan: parseInt(formData.beratBadan),
-        tinggiBadan: parseInt(formData.tinggiBadan),
-      };
-
-      const response = await editUserData(editedUserData);
-      console.log(formData);
-      console.log(response);
-      setTimeout(() => {
-        toggleUbahStatusPopup();
-      }, 1000);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     setFormData({
@@ -110,8 +114,57 @@ const Dashboard = () => {
       alamat: userData.alamat,
       beratBadan: userData.beratBadan,
       tinggiBadan: userData.tinggiBadan,
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: "",
     });
   }, [userData]);
+
+  const handleAction = async (actionType) => {
+    try {
+      if (actionType === "edit") {
+        console.log("Performing user data edit...");
+        const editedUserData = {
+          ...formData,
+          umur: parseInt(formData.umur),
+          beratBadan: parseInt(formData.beratBadan),
+          tinggiBadan: parseInt(formData.tinggiBadan),
+        };
+        const response = await editUserData(editedUserData);
+        setTimeout(() => {
+          toggleUbahStatusPopup();
+        }, 1000);
+      } else if (actionType === "passwordChange") {
+        console.log("Performing password change...");
+        const response = await changePassword(
+          formData.oldPassword,
+          formData.newPassword,
+          formData.confirmPassword
+        );
+        setTimeout(() => {
+          togglePasswordSuccessPopup();
+        }, 1000);
+      } else {
+        console.log("Invalid action type.");
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 500) {
+          setErrorMessage("Email atau password salah. Silakan coba lagi!");
+        } else if (status === 400) {
+          setErrorMessage("Itu bukan email. Silakan coba lagi!");
+        } else if (status === 404) {
+          setErrorMessage("Email tidak ditemukan!");
+        } else {
+          setErrorMessage("An error occurred. Please try again.");
+        }
+      } else {
+        setErrorMessage("Network error. Please try again.");
+      }
+    }
+  };
 
   return (
     <div>
@@ -410,7 +463,7 @@ const Dashboard = () => {
                 onClick={() => {
                   toggleUbahPopup();
                   setTimeout(() => {
-                    handleEdit();
+                    handleAction("edit");
                   }, 500);
                 }}
               >
@@ -440,11 +493,11 @@ const Dashboard = () => {
             </div>
             <Input
               className={"relative font-normal"}
-              type={showPassword ? "text" : "password"}
-              name={"password"}
+              type={showOldPassword ? "text" : "password"}
+              name={"oldPassword"}
               placeholder={"Masukkan password sebelumnya"}
               onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
+                setFormData({ ...formData, oldPassword: e.target.value })
               }
               required={true}
             >
@@ -452,18 +505,21 @@ const Dashboard = () => {
                 className={
                   "absolute right-5 top-2 text-cust-orange-normal font-bold"
                 }
-                onClick={togglePasswordVisibility}
+                onClick={() => togglePasswordVisibility("oldPassword")}
               >
-                show
+                {showOldPassword ? "hide" : "show"}
               </button>
             </Input>
+            {/* {formData.oldPassword !== userData.password && (
+                <div className="text-red-500 text-sm">Password salah.</div>
+              )} */}
             <Input
               className={"relative font-normal"}
-              type={showPassword ? "text" : "password"}
-              name={"password"}
+              type={showNewPassword ? "text" : "password"}
+              name={"newPassword"}
               placeholder={"Masukkan password baru"}
               onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
+                setFormData({ ...formData, newPassword: e.target.value })
               }
               required={true}
             >
@@ -471,18 +527,18 @@ const Dashboard = () => {
                 className={
                   "absolute right-5 top-2 text-cust-orange-normal font-bold"
                 }
-                onClick={togglePasswordVisibility}
+                onClick={() => togglePasswordVisibility("newPassword")}
               >
-                show
+                {showNewPassword ? "hide" : "show"}
               </button>
             </Input>
             <Input
               className={"relative font-normal"}
-              type={showPassword ? "text" : "password"}
-              name={"password"}
+              type={showConfirmPassword ? "text" : "password"}
+              name={"confirmPassword"}
               placeholder={"Konfirmasi password kamu"}
               onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
+                setFormData({ ...formData, confirmPassword: e.target.value })
               }
               required={true}
             >
@@ -490,11 +546,19 @@ const Dashboard = () => {
                 className={
                   "absolute right-5 top-2 text-cust-orange-normal font-bold"
                 }
-                onClick={togglePasswordVisibility}
+                onClick={() => togglePasswordVisibility("confirmPassword")}
               >
-                show
+                {showConfirmPassword ? "hide" : "show"}
               </button>
             </Input>
+            {formData.newPassword !== formData.confirmPassword && (
+              <div className="text-red-500 text-sm font-Poppins font-bold">
+                Password tidak cocok.
+              </div>
+            )}
+            <div className="text-red-500 text-sm font-Poppins font-bold text-center">
+              {errorMessage && <p>{errorMessage}</p>}
+            </div>
             <div className="flex flex-row gap-5 w-full justify-center items-center">
               <Button
                 className={
@@ -511,10 +575,13 @@ const Dashboard = () => {
                 type={"button"}
                 variation={"primary-rectangle"}
                 onClick={() => {
-                  togglePasswordPopup();
-                  setTimeout(() => {
-                    togglePasswordSuccessPopup();
-                  }, 500);
+                  if (
+                    formData.newPassword === formData.confirmPassword
+                    // &&
+                    // formData.oldPassword === userData.Password
+                  ) {
+                    handleAction("passwordChange");
+                  }
                 }}
               >
                 Simpan
@@ -523,6 +590,7 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+
       {isPasswordSuccessPopupVisible && (
         <Dialogue
           type={"success"}

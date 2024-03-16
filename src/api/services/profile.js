@@ -41,5 +41,27 @@ const editUserData = async (body) => {
   }
 };
 
+const changePassword = async (oldPassword, newPassword, confirmPassword) => {
+  const token = window.localStorage.getItem("token");
+  const userId = window.localStorage.getItem("userId");
+  try {
+    const response = await axiosInstance.patch(
+      `v1/user/edit-profile/change-password/${userId}`, // Adjust the URL as needed
+      {
+        oldPassword,
+        newPassword,
+        confirmPassword
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
-export { getUserData, editUserData };
+export { getUserData, editUserData, changePassword };

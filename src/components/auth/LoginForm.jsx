@@ -32,7 +32,11 @@ const LoginForm = () => {
       if (error.response) {
         const { status } = error.response;
         if (status === 500) {
-          setErrorMessage("Password salah!");
+          setErrorMessage("Email atau password salah. Silakan coba lagi!");
+        } else if (status === 400) {
+          setErrorMessage("Itu bukan email. Silakan coba lagi!");
+        } else if (status === 404) {
+          setErrorMessage("Email tidak ditemukan!");
         } else {
           setErrorMessage("An error occurred. Please try again.");
         }
