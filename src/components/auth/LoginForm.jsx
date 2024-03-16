@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginPict from "../../assets/LoginPict.png";
 import Input from "../ui/Input.jsx";
@@ -18,12 +18,12 @@ const LoginForm = () => {
     if (e) {
       e.preventDefault();
     }
-  
+
     try {
       const response = await handleLogin(formData);
-  
+
       window.localStorage.setItem("token", response.data.token);
-  
+
       setTimeout(() => {
         navigate("/");
       }, 1000);
@@ -45,7 +45,6 @@ const LoginForm = () => {
       }
     }
   };
-  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -58,9 +57,20 @@ const LoginForm = () => {
     }
   };
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErrorMessage("");
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [errorMessage]);
+
   return (
-    <div className="flex flex-row w-full h-auto pt-10 font-Poppins mb-16" onKeyDown={handleKeyDown}
-    tabIndex={0}>
+    <div
+      className="flex flex-row w-full h-auto pt-10 font-Poppins mb-16"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
       <div className="w-1/2">
         <div className="relative">
           <img className="absolute z-40" src={LoginPict} alt="login" />
@@ -68,7 +78,10 @@ const LoginForm = () => {
       </div>
       <div className="flex w-1/2 justify-center items-start">
         {/* FORM */}
-        <form className="flex flex-col bg-white drop-shadow-2xl px-10 py-12 w-full rounded-2xl mx-32 gap-6 justify-center" onSubmit={(e) => (handleSubmit(e), e.preventDefault())}>
+        <form
+          className="flex flex-col bg-white drop-shadow-2xl px-10 py-12 w-full rounded-2xl mx-32 gap-6 justify-center"
+          onSubmit={(e) => (handleSubmit(e), e.preventDefault())}
+        >
           <div className="justify-start items-start w-full text-lg">
             Selamat datang di{" "}
             <span className="text-cust-orange-normal font-RammettoOne text-xl">
@@ -86,21 +99,33 @@ const LoginForm = () => {
                 type="text"
                 name={"email"}
                 placeholder={"Masukkan email kamu"}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 required={true}
               />
             </div>
             <div className="">
               Password
               <Input
-                className={"relative flex font-normal justify-center items-center"}
+                className={
+                  "relative flex font-normal justify-center items-center"
+                }
                 type={showPassword ? "text" : "password"}
                 name={"password"}
                 placeholder={"Masukkan password kamu"}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
                 required={true}
               >
-                <button type="button" className={"absolute right-5 top-2"} onClick={togglePasswordVisibility}>{showPassword ? "hide" : "show"}</button>
+                <button
+                  type="button"
+                  className={"absolute right-5 top-2"}
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? "hide" : "show"}
+                </button>
               </Input>
             </div>
           </div>

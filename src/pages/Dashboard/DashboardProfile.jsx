@@ -131,9 +131,10 @@ const Dashboard = () => {
           tinggiBadan: parseInt(formData.tinggiBadan),
         };
         const response = await editUserData(editedUserData);
+        toggleUbahPopup();
         setTimeout(() => {
           toggleUbahStatusPopup();
-        }, 1000);
+        }, 500);
       } else if (actionType === "passwordChange") {
         console.log("Performing password change...");
         const response = await changePassword(
@@ -151,20 +152,34 @@ const Dashboard = () => {
       console.log(error);
       if (error.response) {
         const { status } = error.response;
-        if (status === 500) {
-          setErrorMessage("Email atau password salah. Silakan coba lagi!");
-        } else if (status === 400) {
-          setErrorMessage("Itu bukan email. Silakan coba lagi!");
-        } else if (status === 404) {
-          setErrorMessage("Email tidak ditemukan!");
+        if (actionType === "edit") {
+          if (status === 400) {
+            setErrorMessage("Terdapat kesalahan pada input. Cek dan coba lagi!");
+          } else {
+            setErrorMessage("An error occurred. Please try again.");
+          }
+        } else if (actionType == "passwordChange") {
+          if (status === 500) {
+            setErrorMessage("Password lama salah. Silakan coba lagi!");
+          } else {
+            setErrorMessage("An error occurred. Please try again.");
+          }
         } else {
-          setErrorMessage("An error occurred. Please try again.");
+          setErrorMessage("Network error. Please try again.");
         }
       } else {
-        setErrorMessage("Network error. Please try again.");
+        console.log("Invalid action type.");
       }
     }
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setErrorMessage("");
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [errorMessage]);
 
   return (
     <div>
@@ -461,7 +476,6 @@ const Dashboard = () => {
                 type={"button"}
                 variation={"primary-rectangle"}
                 onClick={() => {
-                  toggleUbahPopup();
                   setTimeout(() => {
                     handleAction("edit");
                   }, 500);
@@ -469,6 +483,9 @@ const Dashboard = () => {
               >
                 Simpan
               </Button>
+            </div>
+            <div className="text-red-500 text-sm font-Poppins font-bold text-center">
+              {errorMessage && <p>{errorMessage}</p>}
             </div>
           </div>
         </div>
