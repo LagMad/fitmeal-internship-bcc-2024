@@ -1,16 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Button from "../ui/Button";
 import PhotoProfile from "../../assets/PhotoProfile.png";
 import SVGs from "./SVGs";
 import Dialogue from "../ui/Dialogue";
+import { getUserData } from "../../api/services/profile";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const isAuthenticated = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [userData, setUserData] = useState([]);
+
+  const getUser = async () => {
+    try {
+      
+      const response = await getUserData();
+      console.log("ini data :", response.data);
+      console.log("ini username:", response.data.userName);
+      setUserData(response.data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const togglePopup = () => {
     setPopupVisible(!isPopupVisible);
@@ -67,7 +85,7 @@ const Navbar = () => {
                   onClick={toggleDropdown}
                 >
                   <img className="" src={PhotoProfile} alt="profile" />
-                  Suryanto
+                  {userData.userName}
                 </button>
                 {isOpen && (
                   <div className="absolute top-10 w-full left-0 mt-1 bg-transparent text-center">

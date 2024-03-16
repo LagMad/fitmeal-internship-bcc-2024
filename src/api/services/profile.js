@@ -5,7 +5,7 @@ const getUserData = async () => {
   const userId = window.localStorage.getItem("userId");
 
   try {
-    const response = await axiosInstance.get(`v1/user/${userId}/get`, {
+    const response = await axiosInstance.get(`v1/user/get/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

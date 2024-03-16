@@ -70,8 +70,10 @@ const Dashboard = () => {
 
   const getUser = async () => {
     try {
+      
       const response = await getUserData();
       console.log("ini data :", response.data);
+      console.log("ini username:", response.data.userName);
       setUserData(response.data);
     } catch (error) {
       throw error;
@@ -80,17 +82,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getUser();
-  });
-
-  // const { userName, umur, alamat, beratBadan, tinggiBadan } = data;
-
-  // const [form, setForm] = useState({
-  //   userName,
-  //   umur,
-  //   alamat,
-  //   beratBadan,
-  //   tinggiBadan,
-  // });
+  }, []);
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -134,12 +126,10 @@ const Dashboard = () => {
                   </div>
                   <div className="flex flex-col w-full gap-1">
                     <div className="font-bold text-cust-orange-normal text-3xl">
-                      Suryanto Bahari
-                      {/* {form.userName} */}
+                      {userData.userName}
                     </div>
                     <div>
-                      suryanto1234@gmail.com
-                      {/* {form.email} */}
+                      {userData.email}
                     </div>
                   </div>
                 </div>
@@ -169,7 +159,7 @@ const Dashboard = () => {
                           className="w-full"
                           type="text"
                           name="userName"
-                          value=""
+                          value={userData.userName}
                           readOnly={true}
                         />
                       </div>
@@ -185,7 +175,7 @@ const Dashboard = () => {
                           className="w-full"
                           type="text"
                           name="email"
-                          value=""
+                          value={userData.email}
                           readOnly={true}
                         />
                       </div>
@@ -201,7 +191,7 @@ const Dashboard = () => {
                           className="w-full"
                           type="text"
                           name="alamat"
-                          value=""
+                          value={userData.alamat}
                           readOnly={true}
                         />
                       </div>
@@ -219,7 +209,7 @@ const Dashboard = () => {
                           className="w-full"
                           type="text"
                           name="umur"
-                          value=""
+                          value={userData.umur}
                           readOnly={true}
                         />
                       </div>
@@ -235,7 +225,7 @@ const Dashboard = () => {
                           className="w-full"
                           type="text"
                           name="beratBadan"
-                          value=""
+                          value={userData.beratBadan}
                           readOnly={true}
                         />
                       </div>
@@ -250,8 +240,8 @@ const Dashboard = () => {
                         <Input
                           className="w-full"
                           type="text"
-                          name="username"
-                          value=""
+                          name="tinggiBadan"
+                          value={userData.tinggiBadan}
                           readOnly={true}
                         />
                       </div>
