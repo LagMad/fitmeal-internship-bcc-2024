@@ -13,7 +13,6 @@ const NavbarDashboard = () => {
 
   const getUser = async () => {
     try {
-      
       const response = await getUserData();
       setUserData(response.data);
     } catch (error) {
@@ -38,8 +37,6 @@ const NavbarDashboard = () => {
     }, 1000);
   };
 
-  
-
   return (
     <div>
       <div className="flex flex-col w-full justify-center items-center">
@@ -55,9 +52,9 @@ const NavbarDashboard = () => {
             <div className="flex flex-row w-1/2 justify-center items-center gap-10">
               <SearchBar />
               <hr className="border-[1.5px] border-cust-orange-normal h-10" />
-              <img className="" src={PhotoProfile} alt="profile" />
-              <div className="font-bold text-cust-orange-normal text-2xl overflow-hidden">
-                {userData.userName}
+              <div className="flex flex-row justify-center items-center gap-5 text-xl text-cust-orange-normal font-bold w-40 h-full overflow-hidden whitespace-nowrap">
+                <img className="" src={PhotoProfile} alt="profile" />
+                <span className="truncate">{userData.userName}</span>
               </div>
               <button onClick={toggleLogOutPopup}>
                 <SVGs.LogOut />

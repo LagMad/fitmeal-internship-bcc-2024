@@ -100,7 +100,7 @@ const LoginForm = () => {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required={true}
               >
-                <button type="button" className={"absolute right-5 top-2"} onClick={togglePasswordVisibility}>show</button>
+                <button type="button" className={"absolute right-5 top-2"} onClick={togglePasswordVisibility}>{showPassword ? "hide" : "show"}</button>
               </Input>
             </div>
           </div>

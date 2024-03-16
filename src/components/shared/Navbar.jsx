@@ -79,11 +79,11 @@ const Navbar = () => {
             {isAuthenticated ? (
               <div className="relative">
                 <button
-                  className="flex flex-row justify-center items-center gap-5 text-xl text-cust-orange-normal font-bold"
+                  className="flex flex-row justify-center items-center gap-5 text-xl text-cust-orange-normal font-bold w-40 h-full overflow-hidden whitespace-nowrap"
                   onClick={toggleDropdown}
                 >
                   <img className="" src={PhotoProfile} alt="profile" />
-                  {userData.userName}
+                  <span className="truncate">{userData.userName}</span>
                 </button>
                 {isOpen && (
                   <div className="absolute top-10 w-full left-0 mt-1 bg-transparent text-center">
