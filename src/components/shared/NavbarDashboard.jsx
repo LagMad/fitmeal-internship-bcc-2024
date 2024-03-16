@@ -15,8 +15,6 @@ const NavbarDashboard = () => {
     try {
       
       const response = await getUserData();
-      console.log("ini data :", response.data);
-      console.log("ini username:", response.data.userName);
       setUserData(response.data);
     } catch (error) {
       throw error;
@@ -58,7 +56,7 @@ const NavbarDashboard = () => {
               <SearchBar />
               <hr className="border-[1.5px] border-cust-orange-normal h-10" />
               <img className="" src={PhotoProfile} alt="profile" />
-              <div className="font-bold text-cust-orange-normal text-2xl">
+              <div className="font-bold text-cust-orange-normal text-2xl overflow-hidden">
                 {userData.userName}
               </div>
               <button onClick={toggleLogOutPopup}>

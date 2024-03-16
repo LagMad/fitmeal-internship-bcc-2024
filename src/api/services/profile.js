@@ -10,7 +10,6 @@ const getUserData = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;
@@ -19,9 +18,10 @@ const getUserData = async () => {
 
 const editUserData = async (body) => {
   const token = window.localStorage.getItem("token");
+  const userId = window.localStorage.getItem("userId");
   try {
-    const response = await axiosInstance.put(
-      `v1/user/edit-profile/${body.id}`, // Assuming the user's ID is included in the body
+    const response = await axiosInstance.patch(
+      `v1/user/edit-profile/${userId}`, // Corrected URL construction
       {
         userName: body.userName,
         umur: body.umur,
@@ -35,11 +35,11 @@ const editUserData = async (body) => {
         },
       }
     );
-    console.log("ini respons",response.data);
     return response.data;
   } catch (error) {
     throw error;
   }
 };
+
 
 export { getUserData, editUserData };

@@ -17,21 +17,23 @@ const Dashboard = () => {
   const [isPasswordSuccessPopupVisible, setPasswordSuccessPopupVisible] =
     useState(false);
   const [isUbahPopupVisible, setUbahPopupVisible] = useState(false);
-  const [isUbahSuccessPopupVisible, setUbahSuccessPopupVisible] =
-    useState(false);
+  const [isUbahStatusPopupVisible, setUbahStatusPopupVisible] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({
+    userName: "",
+    umur: 0,
+    alamat: "",
+    beratBadan: 0,
+    tinggiBadan: 0,
+  });
+
   const alamatOptions = [
-    { value: "sigura-gura", label: "Sigura-gura" },
-    { value: "sumbersari", label: "Sumbersari" },
-    { value: "dewandaru", label: "Dewandaru" },
+    { value: "Sigura-gura", label: "Sigura-gura" },
+    { value: "Sumbersari", label: "Sumbersari" },
+    { value: "Dewandaru", label: "Dewandaru" },
   ];
   const [formData, setFormData] = useState({
     userName: "",
-    email: "",
-    password: "",
-    aktivitas: "",
-    gender: "",
     umur: 0,
     alamat: "",
     beratBadan: 0,
@@ -58,8 +60,8 @@ const Dashboard = () => {
     setUbahPopupVisible(!isUbahPopupVisible);
   };
 
-  const toggleUbahSuccessPopup = () => {
-    setUbahSuccessPopupVisible(!isUbahSuccessPopupVisible);
+  const toggleUbahStatusPopup = () => {
+    setUbahStatusPopupVisible(!isUbahStatusPopupVisible);
   };
 
   const handleLogout = (e) => {
@@ -70,10 +72,7 @@ const Dashboard = () => {
 
   const getUser = async () => {
     try {
-      
       const response = await getUserData();
-      console.log("ini data :", response.data);
-      console.log("ini username:", response.data.userName);
       setUserData(response.data);
     } catch (error) {
       throw error;
@@ -85,12 +84,19 @@ const Dashboard = () => {
   }, []);
 
   const handleEdit = async (e) => {
-    e.preventDefault();
     try {
-      const response = await editUserData(form);
+      const editedUserData = {
+        ...formData,
+        umur: parseInt(formData.umur),
+        beratBadan: parseInt(formData.beratBadan),
+        tinggiBadan: parseInt(formData.tinggiBadan),
+      };
 
+      const response = await editUserData(editedUserData);
+      console.log(formData);
+      console.log(response);
       setTimeout(() => {
-        window.location.reload();
+        toggleUbahStatusPopup();
       }, 1000);
     } catch (error) {
       console.log(error);
@@ -98,8 +104,14 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    console.log();
-  });
+    setFormData({
+      userName: userData.userName,
+      umur: userData.umur,
+      alamat: userData.alamat,
+      beratBadan: userData.beratBadan,
+      tinggiBadan: userData.tinggiBadan,
+    });
+  }, [userData]);
 
   return (
     <div>
@@ -128,9 +140,7 @@ const Dashboard = () => {
                     <div className="font-bold text-cust-orange-normal text-3xl">
                       {userData.userName}
                     </div>
-                    <div>
-                      {userData.email}
-                    </div>
+                    <div>{userData.email}</div>
                   </div>
                 </div>
                 <div className="flex w-1/2 justify-end items-center">
@@ -292,22 +302,10 @@ const Dashboard = () => {
                         className="w-full"
                         type="text"
                         name="userName"
-                        value=""
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-5 justify-start items-start w-full">
-                  <div className="font-bold text-lg text-cust-orange-normal w-10/12">
-                    Email
-                  </div>
-                  <div className="flex justify-start w-full">
-                    <div className="w-10/12">
-                      <Input
-                        className="w-full"
-                        type="text"
-                        name="email"
-                        value=""
+                        value={formData.userName}
+                        onChange={(e) =>
+                          setFormData({ ...formData, userName: e.target.value })
+                        }
                       />
                     </div>
                   </div>
@@ -343,8 +341,10 @@ const Dashboard = () => {
                       <Input
                         className="w-full"
                         type="text"
-                        name="umur"
-                        value=""
+                        value={formData.umur}
+                        onChange={(e) =>
+                          setFormData({ ...formData, umur: e.target.value })
+                        }
                       />
                     </div>
                   </div>
@@ -359,7 +359,13 @@ const Dashboard = () => {
                         className="w-full"
                         type="text"
                         name="beratBadan"
-                        value=""
+                        value={formData.beratBadan}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            beratBadan: e.target.value,
+                          })
+                        }
                       />
                     </div>
                   </div>
@@ -373,8 +379,14 @@ const Dashboard = () => {
                       <Input
                         className="w-full"
                         type="text"
-                        name="username"
-                        value=""
+                        name="tinggiBadan"
+                        value={formData.tinggiBadan}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            tinggiBadan: e.target.value,
+                          })
+                        }
                       />
                     </div>
                   </div>
@@ -398,7 +410,7 @@ const Dashboard = () => {
                 onClick={() => {
                   toggleUbahPopup();
                   setTimeout(() => {
-                    toggleUbahSuccessPopup();
+                    handleEdit();
                   }, 500);
                 }}
               >
@@ -408,13 +420,16 @@ const Dashboard = () => {
           </div>
         </div>
       )}
-      {isUbahSuccessPopupVisible && (
+      {isUbahStatusPopupVisible && (
         <Dialogue
           type={"success"}
           title={"Berhasil"}
           message={"Informasi pribadi baru kamu telah berhasil disimpan"}
           buttonLabel={"Kembali"}
-          onClick={toggleUbahSuccessPopup}
+          onClick={() => {
+            toggleUbahStatusPopup;
+            window.location.reload();
+          }}
         />
       )}
       {isPasswordPopupVisible && (
@@ -523,7 +538,6 @@ const Dashboard = () => {
           onClick={() => {
             togglePasswordSuccessPopup;
             handleLogout();
-            // navigate("/login");
           }}
         />
       )}
