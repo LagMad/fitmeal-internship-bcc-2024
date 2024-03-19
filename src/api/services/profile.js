@@ -10,6 +10,7 @@ const getUserData = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(response);  
     return response.data;
   } catch (error) {
     throw error;
@@ -21,7 +22,7 @@ const editUserData = async (body) => {
   const userId = window.localStorage.getItem("userId");
   try {
     const response = await axiosInstance.patch(
-      `v1/user/edit-profile/${userId}`, // Corrected URL construction
+      `v1/user/edit-profile/${userId}`,
       {
         userName: body.userName,
         umur: body.umur,
@@ -46,7 +47,7 @@ const changePassword = async (oldPassword, newPassword, confirmPassword) => {
   const userId = window.localStorage.getItem("userId");
   try {
     const response = await axiosInstance.patch(
-      `v1/user/edit-profile/change-password/${userId}`, // Adjust the URL as needed
+      `v1/user/edit-profile/change-password/${userId}`,
       {
         oldPassword,
         newPassword,

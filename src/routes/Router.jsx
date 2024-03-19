@@ -13,78 +13,96 @@ import RegisterPage from "../pages/RegisterPage";
 import LacakNutrisi from "../pages/Dashboard/LacakNutrisi";
 import Dashboard from "../pages/Dashboard/DashboardProfile";
 import RencanaMakan from "../pages/Dashboard/RencanaMakan";
+import InformasiNutrisi from "../pages/InformasiNutrisi";
+import LupaPassword from "../pages/LupaPasswordPage";
 // import SignupPage from "../pages/SignupPage";
 
 // export default Router;
 
 const Router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <Home />,
-  // },
-  // {
-  //   path: "/login",
-  //   element: <LoginPage />,
-  // },
-  // {
-  //   path: "/register",
-  //   element: <RegisterPage />,
-  // },
-  // {
-  //   path: "/lacaknutrisi",
-  //   element: <LacakNutrisi />,
-  // },
-  // {
-  //   path: "/rencanamakan",
-  //   element: <RencanaMakan />,
-  // },
-  // {
-  //   path: "/dashboard",
-  //   element: <Dashboard />,
-  // },
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
+  {
+    path: "/lacaknutrisi",
+    element: <LacakNutrisi />,
+  },
+  {
+    path: "/rencanamakan",
+    element: <RencanaMakan />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "/lacaknutrisi",
+    element: <LacakNutrisi />,
+  },
+  {
+    path: "/rencanamakan",
+    element: <RencanaMakan />,
+  },
+  {
+    path: "/informasinutrisi",
+    element: <InformasiNutrisi />,
+  },
+  {
+    path: "/lupapassword",
+    element: <LupaPassword />,
+  },
 
-  {
-    element: <AuthRoute />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/signup",
-        element: <RegisterPage />,
-      },
-    ],
-  },
-  {
-    element: <ProtectedRoute />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "/lacaknutrisi",
-        element: <LacakNutrisi />,
-      },
-      {
-        path: "/rencanamakan",
-        element: <RencanaMakan />,
-      },
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-    ],
-  },
+  // {
+  //   element: <AuthRoute />,
+  //   children: [
+  //     {
+  //       path: "/",
+  //       element: <Home />,
+  //     },
+  //     {
+  //       path: "/login",
+  //       element: <LoginPage />,
+  //     },
+  //     {
+  //       path: "/signup",
+  //       element: <RegisterPage />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   element: <ProtectedRoute />,
+  //   children: [
+  //     {
+  //       path: "/",
+  //       element: <Home />,
+  //     },
+  //     {
+  //       path: "/dashboard",
+  //       element: <Dashboard />,
+  //     },
+  //     {
+  //       path: "/lacaknutrisi",
+  //       element: <LacakNutrisi />,
+  //     },
+  //     {
+  //       path: "/rencanamakan",
+  //       element: <RencanaMakan />,
+  //     },
+  //     {
+  //       path: "/informasinutrisi",
+  //       element: <InformasiNutrisi />,
+  //     },
+  //   ],
+  // },
 ]);
 
 export default Router;

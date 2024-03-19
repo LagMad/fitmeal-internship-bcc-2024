@@ -13,9 +13,9 @@ const Button = ({
       case "secondary-rectangle":
         return "py-2 md:py-2.5 px-3 md:px-8 bg-white hover:bg-cust-orange-normal text-cust-orange-normal hover:text-white rounded-xl font-semibold";
       case "primary-round":
-        return "bg-cust-orange-normal hover:bg-white py-3 px-3 rounded-full text-white hover:text-cust-orange-normal border-transparent border-2 hover:border-2 hover:border-cust-orange-normal drop-shadow-lg";
+        return "bg-cust-green-normal hover:bg-white py-3 px-3 rounded-full text-white hover:text-cust-green-normal border-transparent border-2 hover:border-2 hover:border-white drop-shadow-lg";
       case "secondary-round":
-        return "bg-white hover:bg-cust-orange-normal py-3 px-3 text-cust-orange-normal hover:text-white rounded-full";
+        return "bg-white hover:bg-cust-green-normal py-3 px-3 text-cust-green-normal hover:text-white rounded-full";
       case "tertiary-white":
         return "bg-white text-cust-light-active hover:text-cust-orange-normal rounded-none hover:border-b-cust-orange-normal hover:border-b-2";
       default:

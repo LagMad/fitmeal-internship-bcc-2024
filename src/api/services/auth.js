@@ -20,9 +20,9 @@ const handleLogin = async (body) => {
       password: body.password,
     });
 
-    const { token, id } = response.data; // Extracting userId from response
-    window.localStorage.setItem(  'token', response.data.data.token);
-    window.localStorage.setItem('userId', response.data.data.id); // Storing userId in localStorage
+    const { token, id } = response.data;
+    window.localStorage.setItem(  'token', token);
+    window.localStorage.setItem('userId', response.data.data.id);
     return response.data;
   } catch (error) {
     throw error;

@@ -38,7 +38,7 @@ const Register1 = ({ nextStep, Form, setForm }) => {
         <label className="w-full" style={{ cursor: "pointer" }}>
           <div
             className={`text-left rounded-xl border-2 border-cust-orange-normal p-3 ${
-              isChecked === "tidak_terlalu_sibuk"
+              isChecked === "sangat jarang olahraga"
                 ? "bg-cust-orange-normal"
                 : "bg-white"
             }`}
@@ -47,28 +47,28 @@ const Register1 = ({ nextStep, Form, setForm }) => {
               className="hidden"
               type="radio"
               name="aktivitas"
-              value="tidak_terlalu_sibuk"
-              checked={isChecked === "tidak_terlalu_sibuk"}
-              onChange={() => handleChange("tidak_terlalu_sibuk")}
+              value="sangat jarang olahraga"
+              checked={isChecked === "sangat jarang olahraga"}
+              onChange={() => handleChange("sangat jarang olahraga")}
               required
             />
             <div
               className={`z-10 relative text-xl ${
-                isChecked === "tidak_terlalu_sibuk"
+                isChecked === "sangat jarang olahraga"
                   ? "text-white"
                   : "text-cust-orange-normal"
               }`}
             >
-              Tidak Terlalu Sibuk
+              Sangat Jarang Olahraga
             </div>
             <div
               className={`text-[16px] font-normal ${
-                isChecked === "tidak_terlalu_sibuk"
+                isChecked === "sangat jarang olahraga"
                   ? "text-white"
                   : "text-cust-black-light-active"
               }`}
             >
-              Menghabiskan banyak waktu untuk bersantai
+              1 kali per minggu
             </div>
           </div>
         </label>
@@ -76,7 +76,7 @@ const Register1 = ({ nextStep, Form, setForm }) => {
         <label className="w-full" style={{ cursor: "pointer" }}>
           <div
             className={`text-left rounded-xl border-2 border-cust-orange-normal p-3 ${
-              isChecked === "lumayan_sibuk"
+              isChecked === "jarang olahraga"
                 ? "bg-cust-orange-normal"
                 : "bg-white"
             }`}
@@ -85,28 +85,28 @@ const Register1 = ({ nextStep, Form, setForm }) => {
               className="hidden"
               type="radio"
               name="aktivitas"
-              value="lumayan_sibuk"
-              checked={isChecked === "lumayan_sibuk"}
-              onChange={() => handleChange("lumayan_sibuk")}
+              value="jarang olahraga"
+              checked={isChecked === "jarang olahraga"}
+              onChange={() => handleChange("jarang olahraga")}
               required
             />
             <div
               className={`z-10 relative text-xl ${
-                isChecked === "lumayan_sibuk"
+                isChecked === "jarang olahraga"
                   ? "text-white"
                   : "text-cust-orange-normal"
               }`}
             >
-              Lumayan Sibuk
+              Jarang Olahraga
             </div>
             <div
               className={`text-[16px] font-normal ${
-                isChecked === "lumayan_sibuk"
+                isChecked === "jarang olahraga"
                   ? "text-white"
                   : "text-cust-black-light-active"
               }`}
             >
-              Dapat bersantai di beberapa waktu
+              1 - 3 kali per minggu
             </div>
           </div>
         </label>
@@ -114,33 +114,33 @@ const Register1 = ({ nextStep, Form, setForm }) => {
         <label className="w-full" style={{ cursor: "pointer" }}>
           <div
             className={`text-left rounded-xl border-2 border-cust-orange-normal p-3 ${
-              isChecked === "sibuk" ? "bg-cust-orange-normal" : "bg-white"
+              isChecked === "sering olahraga" ? "bg-cust-orange-normal" : "bg-white"
             }`}
           >
             <input
               className="hidden"
               type="radio"
               name="aktivitas"
-              value="sibuk"
-              checked={isChecked === "sibuk"}
-              onChange={() => handleChange("sibuk")}
+              value="sering olahraga"
+              checked={isChecked === "sering olahraga"}
+              onChange={() => handleChange("sering olahraga")}
               required
             />
             <div
               className={`z-10 relative text-xl ${
-                isChecked === "sibuk" ? "text-white" : "text-cust-orange-normal"
+                isChecked === "sering olahraga" ? "text-white" : "text-cust-orange-normal"
               }`}
             >
-              Sibuk
+              Sering Olahraga
             </div>
             <div
               className={`text-[16px] font-normal ${
-                isChecked === "sibuk"
+                isChecked === "sering olahraga"
                   ? "text-white"
                   : "text-cust-black-light-active"
               }`}
             >
-              Pekerjaan yang terjadwal dalam rentang waktu tertentu
+              4 - 5 kali per minggu
             </div>
           </div>
         </label>
@@ -148,7 +148,7 @@ const Register1 = ({ nextStep, Form, setForm }) => {
         <label className="w-full" style={{ cursor: "pointer" }}>
           <div
             className={`text-left rounded-xl border-2 border-cust-orange-normal p-3 ${
-              isChecked === "sangat_sibuk"
+              isChecked === "sangat sering olahraga"
                 ? "bg-cust-orange-normal"
                 : "bg-white"
             }`}
@@ -157,28 +157,28 @@ const Register1 = ({ nextStep, Form, setForm }) => {
               className="hidden"
               type="radio"
               name="aktivitas"
-              value="sangat_sibuk"
-              checked={isChecked === "sangat_sibuk"}
-              onChange={() => handleChange("sangat_sibuk")}
+              value="sangat sering olahraga"
+              checked={isChecked === "sangat sering olahraga"}
+              onChange={() => handleChange("sangat sering olahraga")}
               required
             />
             <div
               className={`z-10 relative text-xl ${
-                isChecked === "sangat_sibuk"
+                isChecked === "sangat sering olahraga"
                   ? "text-white"
                   : "text-cust-orange-normal"
               }`}
             >
-              Sangat Sibuk
+              Sangat Sering Olahraga
             </div>
             <div
               className={`text-[16px] font-normal ${
-                isChecked === "sangat_sibuk"
+                isChecked === "sangat sering olahraga"
                   ? "text-white"
                   : "text-cust-black-light-active"
               }`}
             >
-              Pekerjaan yang terjadwal dalam rentang waktu yang lama
+              6 - 7 kali per minggu
             </div>
           </div>
         </label>

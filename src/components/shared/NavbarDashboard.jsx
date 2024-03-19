@@ -40,7 +40,6 @@ const NavbarDashboard = () => {
   return (
     <div>
       <div className="flex flex-col w-full justify-center items-center">
-        {/* NAVBAR */}
         <div className="flex flex-row w-full justify-center items-center py-5">
           <div className="flex flex-row w-full mx-32 drop-shadow-xl bg-white py-3 px-5 rounded-lg justify-between items-center">
             <a
@@ -50,7 +49,9 @@ const NavbarDashboard = () => {
               FitMeal
             </a>
             <div className="flex flex-row w-1/2 justify-center items-center gap-10">
-              <SearchBar />
+              <div>
+                <SearchBar placeholder={"Search"} fillColor={"#FA6815"} />
+              </div>
               <hr className="border-[1.5px] border-cust-orange-normal h-10" />
               <div className="flex flex-row justify-center items-center gap-5 text-xl text-cust-orange-normal font-bold w-40 h-full overflow-hidden whitespace-nowrap">
                 <img className="" src={PhotoProfile} alt="profile" />

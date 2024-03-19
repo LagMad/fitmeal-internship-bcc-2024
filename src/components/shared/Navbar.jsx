@@ -54,23 +54,23 @@ const Navbar = () => {
             FitMeal
           </a>
           <div className="flex flex-row w-4/6 justify-center items-center gap-16">
-            <Button type={"button"} variation={"tertiary-white"}>
+            <Button type={"button"} variation={"tertiary-white"} onClick={() => navigate("/")}>
               Beranda
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"}>
+            <Button type={"button"} variation={"tertiary-white"} onClick={() => navigate("/informasinutrisi")}>
               Informasi Nutrisi
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"}>
+            <Button type={"button"} variation={"tertiary-white"} onClick={() => navigate("/rencanamakan")}>
               Rencana Makan
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"}>
+            <Button type={"button"} variation={"tertiary-white"} onClick={""}>
               Forum Komunitas
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"}>
+            <Button type={"button"} variation={"tertiary-white"} onClick={""}>
               Testimonial
             </Button>
           </div>

@@ -38,7 +38,7 @@ const FooterALT = ({ position }) => {
     }
   }
 
-  const custOrange = "cust-orange-sosmed";
+  const custGreen = "cust-green-sosmed";
 
   return (
     <div className="flex flex-col w-full h-auto bg-cust-orange-normal font-Poppins text-white justify-center items-center px-32 pt-0 sm:pt-12 pb-5 drop-shadow-2xl z-10">
@@ -53,7 +53,7 @@ const FooterALT = ({ position }) => {
             >
               <Button type={"button"} variation={"primary-round"} onClick={() => {window.open("https://www.facebook.com"), "_blank"}}>
                 <SVGs.Facebook
-                  fillColor={isFacebookHovered ? custOrange : "white"}
+                  fillColor={isFacebookHovered ? custGreen : "white"}
                 />
               </Button>
             </div>
@@ -64,7 +64,7 @@ const FooterALT = ({ position }) => {
             >
               <Button type={"button"} variation={"primary-round"} onClick={() => {window.open("https://www.twitter.com"), "_blank"}}>
                 <SVGs.Twitter
-                  fillColor={isTwitterHovered ? custOrange : "white"}
+                  fillColor={isTwitterHovered ? custGreen : "white"}
                 />
               </Button>
             </div>
@@ -75,7 +75,7 @@ const FooterALT = ({ position }) => {
             >
               <Button type={"button"} variation={"primary-round"} onClick={() => {window.open("https://www.instagram.com"), "_blank"}}>
                 <SVGs.Instagram
-                  fillColor={isInstagramHovered ? custOrange : "white"}
+                  fillColor={isInstagramHovered ? custGreen : "white"}
                 />
               </Button>
             </div>
@@ -86,7 +86,7 @@ const FooterALT = ({ position }) => {
             >
               <Button type={"button"} variation={"primary-round"} onClick={() => {window.open("https://www.tiktok.com"), "_blank"}}>
                 <SVGs.TikTok
-                  fillColor={isTiktokHovered ? custOrange : "white"}
+                  fillColor={isTiktokHovered ? custGreen : "white"}
                 />
               </Button>
             </div>

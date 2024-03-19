@@ -16,13 +16,15 @@ import DashboardMenu from "../../components/shared/DashboardMenu";
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const [isLogoutPopupVisible, setLogoutPopupVisible] = useState(false);
   const [isPasswordPopupVisible, setPasswordPopupVisible] = useState(false);
   const [isPasswordSuccessPopupVisible, setPasswordSuccessPopupVisible] =
     useState(false);
   const [isUbahPopupVisible, setUbahPopupVisible] = useState(false);
   const [isUbahStatusPopupVisible, setUbahStatusPopupVisible] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [userData, setUserData] = useState({
     userName: "",
     umur: 0,
@@ -30,12 +32,8 @@ const Dashboard = () => {
     beratBadan: 0,
     tinggiBadan: 0,
     password: "",
+    updatedAt: "",
   });
-  const [showOldPassword, setShowOldPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
   const alamatOptions = [
     { value: "Sigura-gura", label: "Sigura-gura" },
     { value: "Sumbersari", label: "Sumbersari" },
@@ -51,10 +49,6 @@ const Dashboard = () => {
     newPassword: "",
     confirmPassword: "",
   });
-
-  const toggleLogOutPopup = () => {
-    setLogoutPopupVisible(!isLogoutPopupVisible);
-  };
 
   const togglePasswordPopup = () => {
     setPasswordPopupVisible(!isPasswordPopupVisible);
@@ -154,7 +148,9 @@ const Dashboard = () => {
         const { status } = error.response;
         if (actionType === "edit") {
           if (status === 400) {
-            setErrorMessage("Terdapat kesalahan pada input. Cek dan coba lagi!");
+            setErrorMessage(
+              "Terdapat kesalahan pada input. Cek dan coba lagi!"
+            );
           } else {
             setErrorMessage("An error occurred. Please try again.");
           }
@@ -181,11 +177,24 @@ const Dashboard = () => {
     return () => clearTimeout(timeout);
   }, [errorMessage]);
 
+  const formatDate = (dateString) => {
+    const options = {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("id-ID", options);
+  };
+
   return (
     <div>
       <DashboardLayout>
         <div className="flex flex-col mx-32 gap-5 mb-10 z-0">
-          <div className="ml-[88px] font-bold text-cust-orange-normal text-xl">
+          <div className="ml-[88px] font-normal text-cust-orange-normal text-xl">
             Profil
           </div>
           <div className="flex flex-row gap-5">
@@ -222,7 +231,7 @@ const Dashboard = () => {
                   Informasi Pribadi
                 </div>
                 <div className="flex text-cust-black-light-active justify-center items-center">
-                  Terakhir diperbarui 12 Maret 2024
+                  Terakhir diperbarui {formatDate(userData.updatedAt)}
                 </div>
               </div>
               <div className="flex flex-row w-full justify-between">
@@ -592,11 +601,7 @@ const Dashboard = () => {
                 type={"button"}
                 variation={"primary-rectangle"}
                 onClick={() => {
-                  if (
-                    formData.newPassword === formData.confirmPassword
-                    // &&
-                    // formData.oldPassword === userData.Password
-                  ) {
+                  if (formData.newPassword === formData.confirmPassword) {
                     handleAction("passwordChange");
                   }
                 }}

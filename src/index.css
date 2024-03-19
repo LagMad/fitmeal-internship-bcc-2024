@@ -44,13 +44,13 @@
   src: url('./assets/fonts/Poppins-SemiBold.otf') format('opentype');
 }
 
-.cust-orange-sosmed {
-  fill: #FA6815;
+.cust-green-sosmed {
+  fill: #52D812;
   transition: fill 0.3s ease;
 }
 
-.cust-orange-sosmed:hover {
-  fill: #FA6815;
+.cust-green-sosmed:hover {
+  fill: #52D812;
 }
 
 .absolute-wrapper {
@@ -80,3 +80,7 @@
   z-index: -1;
 }
 
+.svg-hover-color:hover {
+  fill: white;
+  transition: fill 0.3s ease;
+}
