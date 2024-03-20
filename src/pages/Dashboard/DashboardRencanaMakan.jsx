@@ -1,59 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SVGs from "../../components/shared/SVGs";
-import Dialogue from "../../components/ui/Dialogue";
-import PhotoProfileDummy from "../../assets/PhotoProfileDummy.png";
-import Input from "../../components/ui/Input";
+
 import Button from "../../components/ui/Button";
 import { getUserData } from "../../api/services/profile";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import DashboardMenu from "../../components/shared/DashboardMenu";
-import NotFound from "../../components/shared/NotFound";
-import ComingSoon from "../../assets/ComingSoon.svg";
 import Salad from "../../assets/Salad1.png";
 
 const RencanaMakan = () => {
   const navigate = useNavigate();
 
-  const [isLogoutPopupVisible, setLogoutPopupVisible] = useState(false);
-  const [isPasswordPopupVisible, setPasswordPopupVisible] = useState(false);
-  const [isPasswordSuccessPopupVisible, setPasswordSuccessPopupVisible] =
-    useState(false);
-  const [isUbahPopupVisible, setUbahPopupVisible] = useState(false);
-  const [isUbahSuccessPopupVisible, setUbahSuccessPopupVisible] =
-    useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState([]);
-
-  const toggleLogOutPopup = () => {
-    setLogoutPopupVisible(!isLogoutPopupVisible);
-  };
-
-  const togglePasswordPopup = () => {
-    setPasswordPopupVisible(!isPasswordPopupVisible);
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const togglePasswordSuccessPopup = () => {
-    setPasswordSuccessPopupVisible(!isPasswordSuccessPopupVisible);
-  };
-
-  const toggleUbahPopup = () => {
-    setUbahPopupVisible(!isUbahPopupVisible);
-  };
-
-  const toggleUbahSuccessPopup = () => {
-    setUbahSuccessPopupVisible(!isUbahSuccessPopupVisible);
-  };
-
-  const handleLogout = (e) => {
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("userId");
-    navigate("/");
-  };
 
   const getUser = async () => {
     try {

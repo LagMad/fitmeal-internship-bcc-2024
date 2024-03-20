@@ -12,6 +12,7 @@ const LupaPasswordPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
+  const [email, setEmail] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -60,8 +61,13 @@ const LupaPasswordPage = () => {
     }
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (emailValue) => {
+    setEmail(emailValue);
     setCurrentStep((prevStep) => prevStep + 1);
+  };
+  const handlePrevStep = (emailValue) => {
+    setEmail(emailValue);
+    setCurrentStep((prevStep) => prevStep - 1);
   };
 
   useEffect(() => {
@@ -73,21 +79,9 @@ const LupaPasswordPage = () => {
   }, [errorMessage]);
 
   const BoxList = [
-    <LupaPassword1
-      nextStep={handleNextStep}
-      Form={formData}
-      setForm={setFormData}
-    />,
-    <LupaPassword2
-      nextStep={handleNextStep}
-      Form={formData}
-      setForm={setFormData}
-    />,
-    <LupaPassword3
-      nextStep={handleNextStep}
-      Form={formData}
-      setForm={setFormData}
-    />,
+    <LupaPassword1 nextStep={(emailValue) => handleNextStep(emailValue)} />,
+    <LupaPassword2 email={email} nextStep={handleNextStep} prevStep={handlePrevStep} />,
+    <LupaPassword3 email={email} />,
   ];
 
   return (

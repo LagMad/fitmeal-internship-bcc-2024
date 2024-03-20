@@ -20,9 +20,8 @@ const handleLogin = async (body) => {
       password: body.password,
     });
 
-    const { token, id } = response.data;
-    window.localStorage.setItem(  'token', token);
-    window.localStorage.setItem('userId', response.data.data.id);
+    const { token } = response.data;
+    window.localStorage.setItem("token", token);
     return response.data;
   } catch (error) {
     throw error;

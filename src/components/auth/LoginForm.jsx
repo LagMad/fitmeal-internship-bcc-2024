@@ -129,9 +129,9 @@ const LoginForm = () => {
               </Input>
             </div>
           </div>
-          <div className="text-cust-orange-normal font-semibold self-end">
+          <a className="text-cust-orange-normal font-semibold self-end" href="/lupapassword">
             Lupa Password?
-          </div>
+          </a>
           <Button type={"submit"} variation={"primary-rectangle"}>
             Masuk
           </Button>

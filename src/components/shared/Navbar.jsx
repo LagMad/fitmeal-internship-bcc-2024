@@ -62,7 +62,7 @@ const Navbar = () => {
               Informasi Nutrisi
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"} onClick={() => navigate("/rencanamakan")}>
+            <Button type={"button"} variation={"tertiary-white"} onClick={() => navigate("/dashboard/rencanamakan")}>
               Rencana Makan
             </Button>
 

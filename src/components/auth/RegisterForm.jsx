@@ -24,9 +24,7 @@ const RegisterForm = () => {
     beratBadan: 0,
     tinggiBadan: 0,
   });
-
   const [errorMessage, setErrorMessage] = useState("");
-
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNextStep = () => {
@@ -47,16 +45,15 @@ const RegisterForm = () => {
     } catch (error) {
       console.log(error);
       if (error.response) {
-        // If the backend returns a response with status code and error message
         const { status, data } = error.response;
         if (status === 500) {
-          // If status code is 409 (Conflict), it means email or username is already taken
-          setErrorMessage("Email sudah terdaftar!"); // Set the error message received from the backend
+
+          setErrorMessage("Email sudah terdaftar!");d
         } else {
-          setErrorMessage("An error occurred. Please try again."); // Generic error message
+          setErrorMessage("An error occurred. Please try again.");
         }
       } else {
-        setErrorMessage("Network error. Please try again."); // If there's a network error
+        setErrorMessage("Network error. Please try again.");
       }
     }
   };

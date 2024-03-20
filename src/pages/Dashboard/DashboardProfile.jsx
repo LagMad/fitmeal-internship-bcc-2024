@@ -536,9 +536,6 @@ const Dashboard = () => {
                 {showOldPassword ? "hide" : "show"}
               </button>
             </Input>
-            {/* {formData.oldPassword !== userData.password && (
-                <div className="text-red-500 text-sm">Password salah.</div>
-              )} */}
             <Input
               className={"relative font-normal"}
               type={showNewPassword ? "text" : "password"}

@@ -1,40 +1,26 @@
 import React, { useState, useEffect } from "react";
-import LoginForm from "../auth/LoginForm";
-import FooterALT from "./FooterALT";
 import { useNavigate } from "react-router-dom";
-import LoginPict from "../../assets/LoginPict.png";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
-import { handleLogin } from "../../api/services/auth";
+import { getCodePassword } from "../../api/services/profile";
 
-const LupaPassword1 = ({ nextStep, Form, setForm }) => {
+const LupaPassword1 = ({ nextStep }) => {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
   });
 
   const handleSubmit = async (e) => {
-    if (e) {
-      e.preventDefault();
-    }
-
+    e.preventDefault();
     try {
-      const response = await handleLogin(formData);
-
-      window.localStorage.setItem("token", response.data.token);
-
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
+      const response = await getCodePassword(formData);
+      nextStep(formData.email)
     } catch (error) {
       console.log(error);
       if (error.response) {
         const { status } = error.response;
-        if (status === 500) {
+        if (status === 500) { 
           setErrorMessage("Email atau password salah. Silakan coba lagi!");
         } else if (status === 400) {
           setErrorMessage("Itu bukan email. Silakan coba lagi!");
@@ -49,33 +35,16 @@ const LupaPassword1 = ({ nextStep, Form, setForm }) => {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Prevent default form submission behavior
-      handleSubmit();
+      handleSubmit(e);
     }
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setErrorMessage("");
-    }, 3000);
-
-    return () => clearTimeout(timeout);
-  }, [errorMessage]);
-
-  const handleNextStep = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
   };
 
   return (
     <form
       className="flex flex-col bg-white drop-shadow-2xl px-10 py-12 w-full rounded-2xl mx-32 gap-6 justify-center"
-      onSubmit={(e) => (handleSubmit(e), e.preventDefault())}
+      onSubmit={handleSubmit}
       onKeyDown={handleKeyDown}
     >
       <div className="font-bold text-4xl text-cust-orange-normal">
@@ -94,19 +63,13 @@ const LupaPassword1 = ({ nextStep, Form, setForm }) => {
             name={"email"}
             placeholder={"Masukkan email kamu"}
             onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
+              setFormData({ email: e.target.value })
             }
             required={true}
           />
         </div>
       </div>
-      <Button
-        type={"submit"}
-        variation={"primary-rectangle"}
-        onClick={() => {
-          handleNextStep();
-        }}
-      >
+      <Button type="submit" variation="primary-rectangle">
         Lanjut
       </Button>
       <div className="text-red-500 font-bold text-center">
