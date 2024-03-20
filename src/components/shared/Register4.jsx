@@ -15,7 +15,7 @@ const Register4 = ({ onSubmit, Form, setForm, errorMsg }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Prevent default form submission behavior
+      e.preventDefault();
       handleSubmit();
     }
   };
@@ -70,8 +70,7 @@ const Register4 = ({ onSubmit, Form, setForm, errorMsg }) => {
           type={"button"}
           variation={"primary-rectangle"}
           onClick={() => {
-            handleSubmit(); // Call handleSubmit without passing the event object
-            console.log(Form);
+            handleSubmit();
           }}
         >
           Buat Akun

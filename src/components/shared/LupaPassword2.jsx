@@ -56,7 +56,7 @@ const LupaPassword2 = ({ nextStep, email, prevStep }) => {
         {[0, 1, 2, 3].map((index) => (
           <Input
             key={index}
-            className={"font-normal h-20 text-center text-5xl"}
+            className={"font-normal h-10 text-center text-xl"}
             type="text"
             maxLength={1}
             onChange={(e) => handleKodeChange(index, e.target.value)}

@@ -37,8 +37,6 @@ const RegisterForm = () => {
     try {
       const response = await handleRegister(formData);
 
-      console.log(response);
-
       setTimeout(() => {
         navigate("/login");
       }, 1000);

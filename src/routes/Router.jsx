@@ -12,9 +12,10 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import LacakNutrisi from "../pages/Dashboard/LacakNutrisi";
 import Dashboard from "../pages/Dashboard/DashboardProfile";
-import RencanaMakan from "../pages/Dashboard/DashboardRencanaMakan";
 import InformasiNutrisi from "../pages/InformasiNutrisi";
 import LupaPassword from "../pages/LupaPasswordPage";
+import DashboardRencanaMakan from "../pages/Dashboard/DashboardRencanaMakan";
+import RencanaMakan from "../pages/RencanaMakan";
 // import SignupPage from "../pages/SignupPage";
 
 // export default Router;
@@ -38,7 +39,7 @@ const Router = createBrowserRouter([
   },
   {
     path: "/rencanamakan",
-    element: <RencanaMakan />,
+    element: <RencanaMakan/>,
   },
   {
     path: "/dashboard/",
@@ -50,7 +51,7 @@ const Router = createBrowserRouter([
   },
   {
     path: "/dashboard/rencanamakan",
-    element: <RencanaMakan />,
+    element: <DashboardRencanaMakan />,
   },
   {
     path: "/informasinutrisi",

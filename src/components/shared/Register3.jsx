@@ -33,7 +33,6 @@ const Register3 = ({nextStep, Form, setForm}) => {
           variation={"primary-rectangle"}
           onClick={() => {
             handleNextStep();
-            console.log(Form);
           }}
         >
           Lanjut

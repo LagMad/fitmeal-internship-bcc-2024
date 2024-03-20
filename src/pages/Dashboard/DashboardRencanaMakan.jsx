@@ -8,7 +8,7 @@ import DashboardLayout from "../../components/layout/DashboardLayout";
 import DashboardMenu from "../../components/shared/DashboardMenu";
 import Salad from "../../assets/Salad1.png";
 
-const RencanaMakan = () => {
+const DashboardRencanaMakan = () => {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState([]);
@@ -326,4 +326,4 @@ const RencanaMakan = () => {
   );
 };
 
-export default RencanaMakan;
+export default DashboardRencanaMakan;

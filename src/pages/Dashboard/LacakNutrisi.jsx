@@ -105,10 +105,8 @@ const LacakNutrisi = () => {
   };
 
   const handleLanjutClick = () => {
-    // Handle Lanjut button click
-    // You can perform actions like showing details of the selected meal
-    console.log("Selected Meal:", selectedMeal);
-    console.log("Meal Form Data:", mealFormData);
+    // console.log("Selected Meal:", selectedMeal);
+    // console.log("Meal Form Data:", mealFormData);
     setIsLanjutClicked(true);
   };
 

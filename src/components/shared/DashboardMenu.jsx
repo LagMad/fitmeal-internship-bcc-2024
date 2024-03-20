@@ -9,7 +9,6 @@ const DashboardMenu = () => {
   const orange = "#FA6815";
   const grey = "#B0B0B0";
 
-  // Define a function to determine if the button should be orange
   const isActive = (path) => {
     return location.pathname === path;
   };
@@ -20,7 +19,9 @@ const DashboardMenu = () => {
         <SVGs.Menu fill={isActive("/dashboard/lacaknutrisi") ? orange : grey} />
       </button>
       <button onClick={() => navigate("/dashboard/rencanamakan")}>
-        <SVGs.RencanaMakan fill={isActive("/dashboard/rencanamakan") ? orange : grey} />
+        <SVGs.RencanaMakan
+          fill={isActive("/dashboard/rencanamakan") ? orange : grey}
+        />
       </button>
       <button onClick={() => navigate("/dashboard")}>
         <SVGs.ProfileDashboard fill={isActive("/dashboard") ? orange : grey} />

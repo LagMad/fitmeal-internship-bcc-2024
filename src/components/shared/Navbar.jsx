@@ -16,7 +16,6 @@ const Navbar = () => {
 
   const getUser = async () => {
     try {
-      
       const response = await getUserData();
       setUserData(response.data);
     } catch (error) {
@@ -54,23 +53,38 @@ const Navbar = () => {
             FitMeal
           </a>
           <div className="flex flex-row w-4/6 justify-center items-center gap-16">
-            <Button type={"button"} variation={"tertiary-white"} onClick={() => navigate("/")}>
+            <Button
+              type={"button"}
+              variation={"tertiary-white"}
+              path={"/"}
+              onClick={() => navigate("/")}
+            >
               Beranda
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"} onClick={() => navigate("/informasinutrisi")}>
+            <Button
+              type={"button"}
+              variation={"tertiary-white"}
+              path={"/informasinutrisi"}
+              onClick={() => navigate("/informasinutrisi")}
+            >
               Informasi Nutrisi
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"} onClick={() => navigate("/dashboard/rencanamakan")}>
+            <Button
+              type={"button"}
+              variation={"tertiary-white"}
+              path={"/rencanamakan"}
+              onClick={() => navigate("/rencanamakan")}
+            >
               Rencana Makan
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"} onClick={""}>
+            <Button type={"button"} variation={"tertiary-white"} path={"/forumkomunitas"} onClick={() => navigate("/")}>
               Forum Komunitas
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"} onClick={""}>
+            <Button type={"button"} variation={"tertiary-white"} path={"/testimonial"} onClick={() => navigate("/")}>
               Testimonial
             </Button>
           </div>
