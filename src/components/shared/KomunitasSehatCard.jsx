@@ -2,7 +2,7 @@ import React from "react";
 import PhotoProfile from "../../assets/PhotoProfile.png";
 import SVGs from "./SVGs";
 
-const ForumKomunitasCard = ({ message, name, likes, time }) => {
+const KomunitasSehatCard = ({ message, name, likes, time }) => {
   return (
     <div className="flex flex-col bg-cust-orange-normal min-w-[450px] h-72 justify-between p-5 rounded-xl text-white font-bold gap-5">
       <div className="font-bold h-52 text-wrap overflow-y-scroll">
@@ -24,4 +24,4 @@ const ForumKomunitasCard = ({ message, name, likes, time }) => {
   );
 };
 
-export default ForumKomunitasCard;
+export default KomunitasSehatCard;

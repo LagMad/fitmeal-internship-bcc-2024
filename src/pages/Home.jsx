@@ -8,7 +8,7 @@ import Platter1 from "../assets/Platter1.png";
 import Platter2 from "../assets/Platter2.png";
 import Platter3 from "../assets/Platter3.png";
 import PhotoProfile from "../assets/PhotoProfile.png";
-import ForumKomunitasCard from "../components/shared/ForumKomunitasCard";
+import KomunitasSehatCard from "../components/shared/KomunitasSehatCard";
 import dataDummy from "../utils/dummy.json";
 import { getUserData } from "../api/services/profile";
 import ReviewCard from "../components/shared/ReviewCard";
@@ -363,11 +363,11 @@ const Home = () => {
         </div>
       </div>
 
-      {/* FORUM KOMUNITAS */}
+      {/* KOMUNITAS SEHAT */}
       <div className="flex flex-col justify-center items-center w-full gap-10">
         <div className="flex flex-row justify-center items-center gap-20 w-full px-36">
           <div className="text-5xl text-cust-orange-normal font-bold text-left">
-            Forum Komunitas
+            Komunitas Sehat
           </div>
           <hr className="border-cust-green-normal border-2 w-52 rounded-full" />
           <div className="flex-row flex justify-center items-center gap-20">
@@ -392,7 +392,7 @@ const Home = () => {
             }}
           >
             {dataDummy.map((card, index) => (
-              <ForumKomunitasCard
+              <KomunitasSehatCard
                 key={index}
                 message={card.message}
                 name={card.name}

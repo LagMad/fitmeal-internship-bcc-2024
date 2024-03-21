@@ -87,7 +87,7 @@ const InformasiNutrisi = () => {
                 isHovered === "Nasi" || isActive === "Nasi" ? white : custOrange
               }
             />
-            <div className="text-xl">Nasi, Mie, & Pasta</div>
+            <div className="text-xl">Nasi, Mie, & Roti</div>
           </button>
           <button
             className={`${
