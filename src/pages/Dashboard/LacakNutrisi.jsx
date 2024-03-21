@@ -168,6 +168,29 @@ const LacakNutrisi = () => {
                     Tambah
                   </Button>
                 </div>
+                <div className="flex flex-col w-full h-fit p-5 justify-between items-center bg-cust-orange-normal rounded-xl gap-4">
+                  <div className="flex flex-row w-full justify-start items-center gap-3">
+                    <SVGs.Lock fillColor={"white"} width={"18"} height={"18"} />
+                    <div className="text-white text-sm font-normal">
+                      Konten Premium
+                    </div>
+                  </div>
+                  <div className="flex flex-row w-full justify-between items-center">
+                    <div className="flex flex-row w-full justify-start items-center gap-3">
+                      <SVGs.TimeFilled width={"26"} />
+                      <div className="text-white font-bold text-lg">
+                        Atur Jadwal Makan
+                      </div>
+                    </div>
+                    <div className="flex justify-end items-center">
+                      <SVGs.RightArrow
+                        fillColor={"white"}
+                        width={"20"}
+                        height={"20"}
+                      />
+                    </div>
+                  </div>
+                </div>
                 <div className="flex flex-col w-full h-fit justify-center items-center bg-white border-2 border-cust-black-light rounded-lg p-3 gap-2">
                   <div className="flex flex-row w-full justify-center items-center gap-3">
                     <SVGs.Lock
@@ -271,7 +294,7 @@ const LacakNutrisi = () => {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col w-full h-fit p-5 justify-center items-center bg-cust-orange-normal rounded-xl gap-4">
+                {/* <div className="flex flex-col w-full h-fit p-5 justify-center items-center bg-cust-orange-normal rounded-xl gap-4">
                   <div className="flex flex-row w-full justify-start items-center gap-3">
                     <SVGs.Lock fillColor={"white"} width={"25"} height={"25"} />
                     <div className="text-white text-lg font-normal">
@@ -289,7 +312,7 @@ const LacakNutrisi = () => {
                       <SVGs.RightArrow fillColor={"white"} width={"20"} height={"20"}/>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

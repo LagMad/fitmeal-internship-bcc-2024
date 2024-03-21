@@ -9,8 +9,8 @@ import InformasiNutrisiTable from "../components/shared/InformasiNutrisiTable";
 
 const InformasiNutrisi = () => {
   const navigate = useNavigate();
-  const [isActive, setIsActive] = useState("Buah");
-  const [isHovered, setIsHovered] = useState("Buah");
+  const [isActive, setIsActive] = useState("Buah & Sayur");
+  const [isHovered, setIsHovered] = useState("Buah & Sayur");
   const [searchBarFillColor, setSearchBarFillColor] = useState("#B0B0B0");
   const [searchQuery, setSearchQuery] = useState("");
   const [mealData, setMealData] = useState([]);
@@ -55,20 +55,20 @@ const InformasiNutrisi = () => {
           </div>
           <button
             className={`${
-              isHovered === "Buah" || isActive === "Buah"
+              isHovered === "Buah & Sayur" || isActive === "Buah & Sayur"
                 ? "bg-cust-orange-normal text-white"
                 : "bg-white text-cust-orange-normal"
             } flex flex-row group justify-start items-center px-3 py-1 rounded-lg gap-4`}
-            onClick={() => setIsActive("Buah")}
-            onMouseEnter={() => setIsHovered("Buah")}
+            onClick={() => setIsActive("Buah & Sayur")}
+            onMouseEnter={() => setIsHovered("Buah & Sayur")}
             onMouseLeave={() => setIsHovered("")}
           >
             <SVGs.Buah
               fillColor={
-                isHovered === "Buah" || isActive === "Buah" ? white : custOrange
+                isHovered === "Buah & Sayur" || isActive === "Buah & Sayur" ? white : custOrange
               }
             />
-            <div className="text-xl">Buah</div>
+            <div className="text-xl">Buah & Sayur</div>
           </button>
           <button
             className={`${
@@ -143,7 +143,7 @@ const InformasiNutrisi = () => {
           <table className="flex flex-col w-full border-[1.5px] border-collapse rounded-lg">
             <thead className="flex w-full">
               <tr className="flex text-cust-orange-normal py-3 w-full items-center">
-                <th className=" w-2/6 text-left py-5 pl-6">Nama Makanan</th>
+                <th className=" w-2/6 text-left py-5 pl-6">Nama Makanan <span className="text-cust-black-light-active font-normal text-xs ml-2">per 100 gram</span></th>
                 <th className=" w-1/6 text-center">Kalori</th>
                 <th className=" w-1/6 text-center">Karbohidrat</th>
                 <th className=" w-1/6 text-center">Protein</th>

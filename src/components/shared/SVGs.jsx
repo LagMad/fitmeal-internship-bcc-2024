@@ -113,8 +113,8 @@ const Time = () => {
 const TimeFilled = ({ fillColor, width, height }) => {
   return (
     <svg
-      width="32"
-      height="33"
+      width={width === "" ? "32" : width}
+      height={height === "" ? "33" : height}
       viewBox="0 0 32 33"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
