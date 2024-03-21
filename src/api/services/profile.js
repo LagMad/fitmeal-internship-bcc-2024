@@ -17,10 +17,9 @@ const getUserData = async () => {
 
 const editUserData = async (body) => {
   const token = window.localStorage.getItem("token");
-  const userId = window.localStorage.getItem("userId");
   try {
     const response = await axiosInstance.patch(
-      `v1/user/edit-profile/${userId}`,
+      `v1/user/edit-profile`,
       {
         userName: body.userName,
         umur: body.umur,
@@ -42,10 +41,9 @@ const editUserData = async (body) => {
 
 const changePassword = async (oldPassword, newPassword, confirmPassword) => {
   const token = window.localStorage.getItem("token");
-  const userId = window.localStorage.getItem("userId");
   try {
     const response = await axiosInstance.patch(
-      `v1/user/edit-profile/change-password/${userId}`,
+      `v1/user/edit-profile/change-password`,
       {
         oldPassword,
         newPassword,
