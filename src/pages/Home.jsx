@@ -516,9 +516,9 @@ const Home = () => {
               })`,
             }}
           >
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            <ReviewCard message={"Terima kasih atas fitur-fitur yang membantu saya menjaga kesehatan secara lebih efektif!"} name={"Kamal"} review={"4.6"}/>
+            <ReviewCard message={"Website yang menakjubkan, dengan ini pola makan saya bisa terjaga dengan baik"} name={"Lewis"} review={"4.6"} />
+            <ReviewCard message={"Ide cemerlang untuk menggabungkan fitur utama Lacak Nutrisi dan Rencana Makan"} name={"Ellie"} review={"4.6"}/>
           </div>
         </div>
       </div>
