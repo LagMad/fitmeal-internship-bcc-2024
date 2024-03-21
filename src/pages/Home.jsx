@@ -141,7 +141,7 @@ const Home = () => {
               <Button
                 type={"button"}
                 variation={"primary-rectangle"}
-                onClick={() => navigate("/lacaknutrisi")}
+                onClick={() => navigate("/dashboard/lacaknutrisi")}
               >
                 Lacak Nutrisi
               </Button>
