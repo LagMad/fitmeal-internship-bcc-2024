@@ -34,10 +34,6 @@ const Router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: "/lacaknutrisi",
-    element: <LacakNutrisi />,
-  },
-  {
     path: "/rencanamakan",
     element: <RencanaMakan/>,
   },
@@ -74,8 +70,16 @@ const Router = createBrowserRouter([
   //       element: <LoginPage />,
   //     },
   //     {
-  //       path: "/signup",
+  //       path: "/register",
   //       element: <RegisterPage />,
+  //     },
+  //     {
+  //       path: "/lupapassword",
+  //       element: <LupaPassword />,
+  //     },
+  //     {
+  //       path: "/informasinutrisi",
+  //       element: <InformasiNutrisi />,
   //     },
   //   ],
   // },
@@ -91,16 +95,20 @@ const Router = createBrowserRouter([
   //       element: <Dashboard />,
   //     },
   //     {
-  //       path: "/lacaknutrisi",
-  //       element: <LacakNutrisi />,
+  //       path: "/dashboard/lacaknutrisi",
+  //       element: <LacakNutrisi/>,
   //     },
   //     {
-  //       path: "/rencanamakan",
-  //       element: <RencanaMakan />,
+  //       path: "/dashboard/rencanamakan",
+  //       element: <DashboardRencanaMakan />,
   //     },
   //     {
   //       path: "/informasinutrisi",
   //       element: <InformasiNutrisi />,
+  //     },
+  //     {
+  //       path: "/rencanamakan",
+  //       element: <RencanaMakan />,
   //     },
   //   ],
   // },

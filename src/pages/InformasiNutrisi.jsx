@@ -72,22 +72,22 @@ const InformasiNutrisi = () => {
           </button>
           <button
             className={`${
-              isHovered === "Sayur" || isActive === "Sayur"
+              isHovered === "Nasi" || isActive === "Nasi"
                 ? "bg-cust-orange-normal text-white"
                 : "bg-white text-cust-orange-normal"
             } flex flex-row group justify-start items-center px-3 py-1 rounded-lg gap-4`}
-            onClick={() => setIsActive("Sayur")}
-            onMouseEnter={() => setIsHovered("Sayur")}
+            onClick={() => setIsActive("Nasi")}
+            onMouseEnter={() => setIsHovered("Nasi")}
             onMouseLeave={() => setIsHovered("")}
           >
-            <SVGs.Sayur
+            <SVGs.Nasi
+              width={20}
+              height={21}
               fillColor={
-                isHovered === "Sayur" || isActive === "Sayur"
-                  ? white
-                  : custOrange
+                isHovered === "Nasi" || isActive === "Nasi" ? white : custOrange
               }
             />
-            <div className="text-xl">Sayur</div>
+            <div className="text-xl">Nasi, Mie, & Pasta</div>
           </button>
           <button
             className={`${

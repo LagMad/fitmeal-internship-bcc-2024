@@ -120,12 +120,12 @@ const Home = () => {
     <MainLayout>
       {/* Hero Section */}
       <div className="flex flex-col w-full min-h-screen pt-10 bg-HeroSection bg-no-repeat overflow-auto">
-        <div className="w-1/2 ml-16 mt-16 px-16">
-          <div className="text-cust-orange-normal font-semibold mb-6">
+        <div className="w-2/3 ml-16 mt-16 px-16">
+          <div className="text-cust-orange-normal font-semibold mb-6 text-lg w-full">
             Solusi Terbaik untuk Kamu
           </div>
           <div className="text-cust-green-normal font-bold text-7xl">
-            Penuhi Nutrisi Harianmu Bersama
+            Penuhi Nutrisi <br/> Harianmu Bersama
           </div>
           <div className="text-cust-orange-normal font-RammettoOne text-7xl mt-4">
             FitMeal
@@ -203,7 +203,7 @@ const Home = () => {
           <p>dengan riset mendalam</p>
         </div>
         <div className="flex flex-col w-full gap-8 justify-center items-end font-bold text-3xl text-white mx-auto">
-          <Button type={"button"} variation={"primary-rectangle"}>
+          <Button type={"button"} variation={"primary-rectangle"} onClick={() => navigate("/informasinutrisi")}>
             Lihat Lebih Banyak
           </Button>
           <div className="flex flex-row w-full gap-8 justify-center items-center">

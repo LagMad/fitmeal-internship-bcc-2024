@@ -50,7 +50,7 @@ const Register1 = ({ nextStep, Form, setForm }) => {
               value="sangat jarang olahraga"
               checked={isChecked === "sangat jarang olahraga"}
               onChange={() => handleChange("sangat jarang olahraga")}
-              required
+              required={true}
             />
             <div
               className={`z-10 relative text-xl ${
@@ -88,7 +88,7 @@ const Register1 = ({ nextStep, Form, setForm }) => {
               value="jarang olahraga"
               checked={isChecked === "jarang olahraga"}
               onChange={() => handleChange("jarang olahraga")}
-              required
+              required={true}
             />
             <div
               className={`z-10 relative text-xl ${
@@ -124,7 +124,7 @@ const Register1 = ({ nextStep, Form, setForm }) => {
               value="sering olahraga"
               checked={isChecked === "sering olahraga"}
               onChange={() => handleChange("sering olahraga")}
-              required
+              required={true}
             />
             <div
               className={`z-10 relative text-xl ${
@@ -160,7 +160,7 @@ const Register1 = ({ nextStep, Form, setForm }) => {
               value="sangat sering olahraga"
               checked={isChecked === "sangat sering olahraga"}
               onChange={() => handleChange("sangat sering olahraga")}
-              required
+              required={true}
             />
             <div
               className={`z-10 relative text-xl ${
