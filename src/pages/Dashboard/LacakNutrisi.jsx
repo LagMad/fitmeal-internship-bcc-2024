@@ -4,7 +4,11 @@ import SVGs from "../../components/shared/SVGs";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 import { getUserData } from "../../api/services/profile";
-import { getMealData } from "../../api/services/meal";
+import {
+  getMealData,
+  getDailyNutritionData,
+  tambahNutrisi,
+} from "../../api/services/meal";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import NutrisiCard from "../../components/ui/NutrisiCard";
 import DashboardMenu from "../../components/shared/DashboardMenu";
@@ -24,15 +28,14 @@ const LacakNutrisi = () => {
     karbohidrat: 0,
   });
   const [mealFormData, setMealFormData] = useState({
-    name: "",
     kalori: 0,
     lemak: 0,
     protein: 0,
     karbohidrat: 0,
   });
-
   const [userData, setUserData] = useState([]);
   const [mealData, setMealData] = useState([]);
+  const [dailyNutritionData, setDailyNutritionData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredMealData, setFilteredMealData] = useState([]);
   const [selectedMeal, setSelectedMeal] = useState(null);
@@ -53,15 +56,36 @@ const LacakNutrisi = () => {
     try {
       const response = await getMealData();
       setMealData(response.data);
-      setFilteredMealData(response.data); // Set filtered meal data initially
+      setFilteredMealData(response.data);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const getDailyNutrition = async () => {
+    try {
+      const response = await getDailyNutritionData();
+      console.log("daily nutrition", response.data);
+      setDailyNutritionData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleTambahNutrisi = async () => {
+    try {
+      console.log("Performing tambah nutrisi...");
+      const response = await tambahNutrisi(mealFormData);
+      toggleStatusDialoguePopUp();
+    } catch (error) {
+      console.log(error)
     }
   };
 
   useEffect(() => {
     getUser();
     getMeal();
+    getDailyNutrition();
   }, []);
 
   useEffect(() => {
@@ -75,7 +99,6 @@ const LacakNutrisi = () => {
 
   useEffect(() => {
     setMealFormData({
-      name: selectedMeal?.name || "", // Update mealFormData when selectedMeal changes
       kalori: selectedMeal?.kalori || 0,
       lemak: selectedMeal?.lemak || 0,
       protein: selectedMeal?.protein || 0,
@@ -105,8 +128,8 @@ const LacakNutrisi = () => {
   };
 
   const handleLanjutClick = () => {
-    // console.log("Selected Meal:", selectedMeal);
-    // console.log("Meal Form Data:", mealFormData);
+    console.log("Selected Meal:", selectedMeal);
+    console.log("Meal Form Data:", mealFormData);
     setIsLanjutClicked(true);
   };
 
@@ -131,13 +154,14 @@ const LacakNutrisi = () => {
                   {Math.round(userData.kalori)} KKal
                 </div>
                 <div className="flex w-full font-normal text-cust-orange-normal text-2xl">
-                  0/{Math.round(userData.kalori)}
+                  {Math.round(dailyNutritionData.kalori)}/
+                  {Math.round(userData.kalori)}
                 </div>
 
                 <Button
                   type={"button"}
                   variation={"primary-rectangle"}
-                  onClick={toggleTambahNutrisiPopUp}
+                  onClick={() => toggleTambahNutrisiPopUp()}
                 >
                   Tambah
                 </Button>
@@ -148,25 +172,28 @@ const LacakNutrisi = () => {
                     icon={"lemak"}
                     title={"Lemak"}
                     goals={Math.round(userData.lemak)}
-                    current={0}
+                    current={Math.round(dailyNutritionData.lemak)}
                   />
                   <NutrisiCard
                     icon={"karbohidrat"}
                     title={"Karbohidrat"}
                     goals={Math.round(userData.karbohidrat)}
-                    current={0}
+                    current={Math.round(dailyNutritionData.karbohidrat)}
                   />
                   <NutrisiCard
                     icon={"protein"}
                     title={"Protein"}
                     goals={Math.round(userData.protein)}
-                    current={0}
+                    current={Math.round(dailyNutritionData.protein)}
                   />
                 </div>
                 <div className="flex relative w-full h-full">
                   <div className="flex absolute w-[calc(100%+50px)] h-[calc(100%+50px)] bg-opacity-20 backdrop-blur-md -top-[25px] -left-[25px] justify-center items-center">
-                    <button className="flex flex-row bg-white rounded-lg py-2 px-7 justify-center items-center gap-5 drop-shadow-2xl" onClick={() => setIsPremiumPopUp(true)}>
-                      <SVGs.Lock />
+                    <button
+                      className="flex flex-row bg-white rounded-lg py-2 px-7 justify-center items-center gap-5 drop-shadow-2xl"
+                      onClick={() => setIsPremiumPopUp(true)}
+                    >
+                      <SVGs.Lock fillColor={"#FA6815"} width={"30"} />
                       <div className="font-bold text-cust-orange-normal text-3xl">
                         Konten Premium
                       </div>
@@ -336,7 +363,7 @@ const LacakNutrisi = () => {
                     type={"button"}
                     variation={"primary-rectangle"}
                     onClick={() => {
-                      toggleStatusDialoguePopUp();
+                      handleTambahNutrisi();
                     }}
                     disabled={!selectedMeal}
                   >
@@ -363,12 +390,15 @@ const LacakNutrisi = () => {
       {isPremiumPopUp && (
         <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-10 backdrop-blur-sm font-Poppins">
           <div className="flex relative flex-row w-2/4 bg-white drop-shadow-2xl rounded-2xl justify-center items-center overflow-hidden">
-            <button className="absolute right-10 top-6" onClick={() => setIsPremiumPopUp(false)}>
+            <button
+              className="absolute right-10 top-6"
+              onClick={() => setIsPremiumPopUp(false)}
+            >
               <SVGs.Cross />
             </button>
             <div className="flex flex-col w-1/2 bg-white justify-start items-center py- px-10 gap-8">
               <div className="flex flex-row w-full justify-start items-center gap-5">
-                <SVGs.Premium/>
+                <SVGs.Premium />
                 <div className="flex flex-col justify-start items-start">
                   <div className="text-lg text-cust-black-light-active">
                     Pribadi
@@ -382,7 +412,12 @@ const LacakNutrisi = () => {
                 Beragam keuntungan untuk mendukung hidup sehatmu
               </div>
               <div className="flex flex-row justify-center items-center">
-                <span className="text-5xl text-cust-orange-normal">Rp 20.000</span> <span className="text-2xl text-cust-black-light-active">/bulan</span>
+                <span className="text-5xl text-cust-orange-normal">
+                  Rp 20.000
+                </span>{" "}
+                <span className="text-2xl text-cust-black-light-active">
+                  /bulan
+                </span>
               </div>
               <Button
                 className={"w-full"}
@@ -392,7 +427,10 @@ const LacakNutrisi = () => {
                 Mulai Premium
               </Button>
             </div>
-            <div className="flex flex-col w-1/2 bg-cust-green-light justify-start items-start py-16 px-10 gap-5" style={{ height: '100%' }}>
+            <div
+              className="flex flex-col w-1/2 bg-cust-green-light justify-start items-start py-16 px-10 gap-5"
+              style={{ height: "100%" }}
+            >
               <div className="font-bold text-cust-orange-normal text-xl">
                 Keuntungan untukmu
               </div>

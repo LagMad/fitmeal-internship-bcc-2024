@@ -201,29 +201,22 @@ const Dashboard = () => {
             <DashboardMenu />
             <div className="flex flex-col w-full h-fit">
               <div className="flex w-full h-40 bg-ProfileHeader bg-top bg-no-repeat bg-cover" />
-              <div className="flex flex-row w-full mt-3 px-20">
-                <div className="flex flex-row w-1/2 gap-8">
-                  <div className="relative">
-                    <img
-                      className="-mt-16"
-                      src={PhotoProfileDummy}
-                      alt="profile picture"
-                    />
-                    <div className="absolute right-1 bottom-2">
-                      <SVGs.ChangePhoto />
-                    </div>
-                  </div>
-                  <div className="flex flex-col w-full gap-1">
-                    <div className="font-bold text-cust-orange-normal text-3xl">
-                      {userData.userName}
-                    </div>
-                    <div>{userData.email}</div>
+              <div className="flex flex-row w-full mt-3 px-20 gap-8">
+                <div className="relative">
+                  <img
+                    className="-mt-16"
+                    src={PhotoProfileDummy}
+                    alt="profile picture"
+                  />
+                  <div className="absolute right-1 bottom-2">
+                    <SVGs.ChangePhoto />
                   </div>
                 </div>
-                <div className="flex w-1/2 justify-end items-center">
-                  <button>
-                    <SVGs.Share />
-                  </button>
+                <div className="flex flex-col w-full gap-1">
+                  <div className="font-bold text-cust-orange-normal text-3xl">
+                    {userData.userName}
+                  </div>
+                  <div>{userData.email}</div>
                 </div>
               </div>
               <div className="flex flex-row w-full justify-between mt-16 mb-10">

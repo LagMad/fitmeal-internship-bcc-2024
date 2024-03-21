@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SVGs from "../components/shared/SVGs";
-import { getUserData } from "../api/services/profile";
 import { getMealData } from "../api/services/meal";
 import Navbar from "../components/shared/Navbar";
 import FooterALT from "../components/shared/FooterALT";
@@ -159,13 +158,11 @@ const InformasiNutrisi = () => {
                       data={meal}
                       index={index}
                       key={index}
-                      // selectedMeal={selectedMeal}
-                      // onSelectMeal={handleSelectMeal}
                     />
                   );
                 })
               ) : (
-                <p>Tidak ada data</p>
+                <p className="p-5">Tidak ada data</p>
               )}
             </tbody>
           </table>

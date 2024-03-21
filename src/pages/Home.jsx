@@ -472,6 +472,7 @@ const Home = () => {
             className={"w-1/3 hover:border-white"}
             type={"button"}
             variation={"secondary-rectangle"}
+            onClick={() => navigate("/rencanamakan")}
           >
             Dapatkan Sekarang
           </Button>
