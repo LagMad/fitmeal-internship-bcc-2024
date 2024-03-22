@@ -52,4 +52,28 @@ const getDailyNutritionData = async () => {
   }
 };
 
-export { getMealData, getDailyNutritionData, tambahNutrisi };
+const tambahPaketMakan = async (body) => {
+  try {
+    const token = window.localStorage.getItem("token");
+    const response = await axiosInstance.post(
+      "v1/user/tambah-paket",
+      {
+        kalori: body.kalori,
+        protein: body.protein,
+        karbohidrat: body.karbohidrat,
+        lemak: body.lemak,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export { getMealData, getDailyNutritionData, tambahNutrisi, tambahPaketMakan };

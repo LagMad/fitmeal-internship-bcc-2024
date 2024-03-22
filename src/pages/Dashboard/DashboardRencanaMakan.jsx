@@ -16,7 +16,6 @@ const DashboardRencanaMakan = () => {
   const getUser = async () => {
     try {
       const response = await getUserData();
-      console.log("ini data :", response.data);
       setUserData(response.data);
     } catch (error) {
       throw error;

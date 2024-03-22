@@ -49,8 +49,14 @@ const NavbarDashboard = () => {
               FitMeal
             </a>
             <div className="flex flex-row w-1/2 justify-end items-center gap-10">
-              <div className="flex flex-row justify-center items-center gap-5 text-xl text-cust-orange-normal font-bold w-40 h-full overflow-hidden whitespace-nowrap">
-                <img className="" src={PhotoProfile} alt="profile" />
+              <div className="flex flex-row justify-center items-center gap-5 text-xl text-cust-orange-normal font-bold w-fit h-full overflow-hidden whitespace-nowrap">
+                <div className="flex w-12 h-12 bg-cust-orange-normal rounded-full justify-center items-center overflow-hidden">
+                  <img
+                    className="max-w-12"
+                    src={userData.photoLink}
+                    alt="profile"
+                  />
+                </div>
                 <span className="truncate">{userData.userName}</span>
               </div>
               <button onClick={toggleLogOutPopup}>

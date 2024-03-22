@@ -25,9 +25,17 @@ import FoodsOnTop from "../../assets/Foods2.png";
 
 const LacakNutrisi = () => {
   const navigate = useNavigate();
+
+  const [linkReady, setLinkReady] = useState(false);
+  const [paymentLink, setPaymentLink] = useState({
+    snapUrl: "",
+  });
+  const [chosenItems, setChosenItems] = useState([]);
   const [isTambahNutrisiPopUp, setTambahNutrisiPopUpVisible] = useState(false);
   const [isTambahNutrisiOptionPopUp, setTambahNutrisiOptionPopUp] =
     useState(false);
+  const [paketMakanPribadiPopUp, setPaketMakanPribadiPopUp] = useState(false);
+  const [tambahPaketStatus, setTambahPaketStatus] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     kalori: 0,
@@ -52,10 +60,13 @@ const LacakNutrisi = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredMealData, setFilteredMealData] = useState([]);
   const [selectedMeal, setSelectedMeal] = useState(null);
+  const [isTambahClicked, setIsTambahClicked] = useState(false);
   const [isLanjutClicked, setIsLanjutClicked] = useState(false);
+  const [isLanjutPaketClicked, setIsLanjutPaketClicked] = useState(false);
   const [isStatusDialogue, setIsStatusDialogue] = useState(false);
   const [isPremiumPopUp, setIsPremiumPopUp] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered1, setIsHovered1] = useState(false);
+  const [isHovered2, setIsHovered2] = useState(false);
   const [timeDataPagi, setTimeDataPagi] = useState({
     time: "",
   });
@@ -108,10 +119,21 @@ const LacakNutrisi = () => {
     try {
       console.log("Performing premium...");
       const response = await payPremium(paymentAmount);
-      console.log(response.data.snapUrl);
+      toggleLinkReady();
+      // console.log(response.data.snapUrl);
+      setPaymentLink({ ...paymentLink, snapUrl: response.data.snapUrl });
+      console.log("ini paymentlink:", paymentLink.snapUrl);
       console.log("handlePayPremium Success");
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleStartPremium = () => {
+    if (paymentLink.snapUrl) {
+      window.open(paymentLink.snapUrl, "_blank");
+    } else {
+      console.error("Payment link is not available");
     }
   };
 
@@ -152,6 +174,18 @@ const LacakNutrisi = () => {
     setIsStatusDialogue(!isStatusDialogue);
   };
 
+  const togglePaketMakananPribadiPopUp = () => {
+    setPaketMakanPribadiPopUp(!paketMakanPribadiPopUp);
+  };
+
+  const toggleTambahPaketStatus = () => {
+    setTambahPaketStatus(!tambahPaketStatus);
+  };
+
+  const toggleLinkReady = () => {
+    setLinkReady(!linkReady);
+  };
+
   const handleSearchQueryChange = (query) => {
     setSearchQuery(query);
     const filteredData = mealData.filter((meal) =>
@@ -164,10 +198,23 @@ const LacakNutrisi = () => {
     setSelectedMeal(meal);
   };
 
+  const handleTambahClick = () => {
+    if (selectedMeal) {
+      setChosenItems([...chosenItems, selectedMeal]);
+      setIsTambahClicked(!isTambahClicked);
+    }
+  };
+
+  const handleDeleteItemClick = (itemToRemove) => {
+    setChosenItems(chosenItems.filter((item) => item !== itemToRemove));
+  };
+
   const handleLanjutClick = () => {
-    console.log("Selected Meal:", selectedMeal);
-    console.log("Meal Form Data:", mealFormData);
     setIsLanjutClicked(true);
+  };
+
+  const handleLanjutPaketClick = () => {
+    setIsLanjutPaketClicked(!isLanjutPaketClicked);
   };
 
   const timeOptionsPagi = [
@@ -258,6 +305,7 @@ const LacakNutrisi = () => {
                     className={"w-full"}
                     type={"button"}
                     variation={"primary-rectangle"}
+                    onClick={() => togglePaketMakananPribadiPopUp()}
                   >
                     Buat
                   </Button>
@@ -300,6 +348,7 @@ const LacakNutrisi = () => {
                         className={"w-full text-xl"}
                         type={"button"}
                         variation={"primary-rectangle"}
+                        onClick={() => handlePayPremium()}
                       >
                         Daftar Premium
                       </Button>
@@ -362,13 +411,6 @@ const LacakNutrisi = () => {
                         <div className="text-white font-bold text-2xl">
                           Atur Pengingat Makan
                         </div>
-                      </div>
-                      <div className="flex w-1/2 justify-end items-center">
-                        <SVGs.RightArrow
-                          fillColor={"white"}
-                          width={"20"}
-                          height={"20"}
-                        />
                       </div>
                     </div>
                     <div className="flex text-white text-left self-start">
@@ -445,13 +487,23 @@ const LacakNutrisi = () => {
             </div>
             <div className="flex flex-row justify-center items-center w-full gap-5">
               <button
-                className="flex flex-col justify-center items-center gap-5 w-1/2 h-72 border-[1.5px] border-cust-black-light p-5 rounded-xl"
+                className={`flex flex-col justify-center items-center gap-5 w-1/2 h-72 border-[1.5px] ${
+                  isHovered1
+                    ? "border-none bg-cust-orange-normal"
+                    : "border-cust-black-light"
+                } p-5 rounded-xl transition duration-300`}
+                onMouseEnter={() => setIsHovered1(true)}
+                onMouseLeave={() => setIsHovered1(false)}
                 onClick={() => {
                   toggleTambahNutrisiOptionPopUp();
                   toggleTambahNutrisiPopUp();
                 }}
               >
-                <div className="font-semibold text-xl text-cust-orange-normal">
+                <div
+                  className={`font-semibold text-xl ${
+                    isHovered1 ? "text-white" : "text-cust-orange-normal"
+                  }`}
+                >
                   Tambah Makanan
                 </div>
                 <div className="flex flex-row justify-center items-center gap-2">
@@ -459,7 +511,11 @@ const LacakNutrisi = () => {
                   <img src={NasiPict} />
                   <img src={SayurPict} />
                 </div>
-                <div className="text-center">
+                <div
+                  className={`text-center ${
+                    isHovered1 ? "text-white" : "text-cust-black-normal"
+                  }`}
+                >
                   Tambah makanan secara manual untuk Lacak Nutrismu
                 </div>
               </button>
@@ -528,7 +584,7 @@ const LacakNutrisi = () => {
                     type={"button"}
                     variation={"primary-rectangle"}
                     onClick={handleLanjutClick}
-                    disabled={!selectedMeal} // Disable Lanjut button if no meal is selected
+                    disabled={!selectedMeal}
                   >
                     Lanjut
                   </Button>
@@ -666,14 +722,16 @@ const LacakNutrisi = () => {
                   /bulan
                 </span>
               </div>
-              <Button
-                className={"w-full"}
-                type={"button"}
-                variation={"primary-rectangle"}
-                onClick={() => handlePayPremium()}
-              >
-                Mulai Premium
-              </Button>
+              {linkReady && (
+                <Button
+                  className={"w-full"}
+                  type={"button"}
+                  variation={"primary-rectangle"}
+                  onClick={handleStartPremium}
+                >
+                  Mulai Premium
+                </Button>
+              )}
             </div>
             <div
               className="flex flex-col w-1/2 bg-cust-green-light justify-start items-start py-28 px-10 gap-2"
@@ -697,6 +755,165 @@ const LacakNutrisi = () => {
             </div>
           </div>
         </div>
+      )}
+      {paketMakanPribadiPopUp && (
+        <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-10 backdrop-blur-sm font-Poppins">
+          <div className="flex flex-col w-1/4 bg-white drop-shadow-2xl rounded-xl justify-center items-center p-8 gap-3">
+            <div className="text-cust-orange-normal font-bold text-3xl justify-start w-full">
+              Paket Makan Pribadi
+            </div>
+            {!isLanjutPaketClicked && (
+              <>
+                <div className="text-left">
+                  Masukkan nama untuk paket makananmu
+                </div>
+                <Input type={"text"} name={"nama"} required={true} />
+                <div className="flex flex-row gap-4 w-full justify-center items-center">
+                  <Button
+                    className={"w-1/2"}
+                    type={"button"}
+                    variation={"secondary-rectangle"}
+                    onClick={() => togglePaketMakananPribadiPopUp()}
+                  >
+                    Batal
+                  </Button>
+                  <Button
+                    className={"w-1/2"}
+                    type={"button"}
+                    variation={"primary-rectangle"}
+                    onClick={() => handleLanjutPaketClick()}
+                  >
+                    Lanjut
+                  </Button>
+                </div>
+              </>
+            )}
+            {isLanjutPaketClicked && (
+              <>
+                {!isTambahClicked && (
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-3 w-full justify-start items-start">
+                      <SearchBar
+                        className={"w-full rounded-xl"}
+                        placeholder={"Cari makananmu"}
+                        fillColor={"#B0B0B0"}
+                        onSearch={handleSearchQueryChange}
+                      />
+                      <div className="text-cust-black-light-active">
+                        Pilih makanan
+                      </div>
+                      <div className="flex flex-col gap-5 w-full max-h-44 overflow-y-scroll">
+                        {filteredMealData.map((meal, index) => (
+                          <LacakNutrisiResult
+                            key={index}
+                            data={meal}
+                            selectedMeal={selectedMeal}
+                            onSelectMeal={handleSelectMeal}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex flex-row w-full justify-center items-center gap-5">
+                      <Button
+                        className={
+                          "border-2 border-cust-orange-normal hover:border-transparent w-full"
+                        }
+                        type={"button"}
+                        variation={"secondary-rectangle"}
+                        onClick={() => {
+                          togglePaketMakananPribadiPopUp();
+                          handleLanjutPaketClick();
+                          setFilteredMealData(mealData);
+                        }}
+                      >
+                        Batal
+                      </Button>
+                      <Button
+                        className={"w-full"}
+                        type={"button"}
+                        variation={"primary-rectangle"}
+                        onClick={() => handleTambahClick()}
+                        disabled={!selectedMeal}
+                      >
+                        Tambah
+                      </Button>
+                    </div>
+                  </div>
+                )}
+                {isTambahClicked && (
+                  <div className="flex flex-col w-full justify-center items-center gap-4">
+                    <div className="flex flex-col w-full justify-start text-left self-start gap-3">
+                      <div className="font-bold text-xl text-cust-orange-normal">
+                        Paket Makan Sehat
+                      </div>
+                      <div>Daftar makanan</div>
+                    </div>
+                    {chosenItems.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex flex-row w-full justify-between items-center gap-3"
+                      >
+                        <div className="flex flex-row justify-start items-center gap-3 w-2/3">
+                          <img src={DagingPict} alt={item.name} />
+                          <div className="text-cust-orange-normal">
+                            {item.name}
+                          </div>
+                        </div>
+                        <div className="flex w-1/3 justify-end">
+                          <button
+                            className="flex self-end"
+                            onClick={() => handleDeleteItemClick(item)}
+                          >
+                            <SVGs.Delete />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="flex flex-col w-full justify-center items-center gap-3">
+                      <div className="flex flex-row w-full justify-center items-center gap-3">
+                        <Button
+                          className={"w-1/2"}
+                          type={"button"}
+                          variation={"primary-rectangle"}
+                          onClick={() => setIsTambahClicked(false)}
+                        >
+                          Tambah Lagi
+                        </Button>
+                        <Button
+                          className={"w-1/2"}
+                          type={"button"}
+                          variation={"primary-rectangle"}
+                          onClick={() => {
+                            toggleTambahPaketStatus();
+                            console.log(chosenItems);
+                          }}
+                        >
+                          Simpan
+                        </Button>
+                      </div>
+                      <Button
+                        className={"w-full"}
+                        type={"button"}
+                        variation={"secondary-rectangle"}
+                      >
+                        Batal
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+      {tambahPaketStatus && (
+        <Dialogue
+          type={"success"}
+          title={"Berhasil"}
+          message={"Paket makanan pribadi berhasil dibuat"}
+          buttonLabel={"kembali"}
+          onClick={() => window.location.reload()}
+        />
       )}
     </div>
   );

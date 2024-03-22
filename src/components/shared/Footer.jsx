@@ -89,48 +89,39 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex w-3/4 justify-between items-start text-left ml-[calc(20%+7.5px)] mr-24">
-          <div className="flex flex-col font-normal gap-3 justify-start items-start">
-            <div className="font-bold mb-6">About</div>
-            <a className="hover:underline" href="#" target="_blank">
-              How it works
-            </a>
-            <a className="hover:underline" href="#" target="_blank">
-              Featured
-            </a>
-            <a className="hover:underline" href="#" target="_blank">
-              Partnership
-            </a>
-            <a className="hover:underline" href="#" target="_blank">
-              Business Relation
-            </a>
-          </div>
+        <div className="flex w-3/4 justify-end items-start text-left ml-[calc(20%+7.5px)] mr-24 gap-28">
           <div className="flex flex-col font-normal gap-3 justify-start items-start">
             <div className="font-bold mb-6 justify-start items-start">
-              Community
+              Layanan
             </div>
-            <a className="hover:underline" href="#" target="_blank">
-              Events
+            <a className="hover:underline" href="/dashboard/lacaknutrisi" >
+              Lacak Nutrisi
             </a>
-            <a className="hover:underline" href="#" target="_blank">
-              Blog
+            <a className="hover:underline" href="/informasinutrisi">
+              Informasi Nutrisi
             </a>
-            <a className="hover:underline" href="#" target="_blank">
-              Promo
+            <a className="hover:underline" href="/dashboard/rencanamakan">
+              Rencana Makan
+            </a>
+            <a className="hover:underline" href="/">
+              Komunitas Sehat
+            </a>
+            <a className="hover:underline" href="/">
+              Premium
             </a>
           </div>
           <div className="flex flex-col font-normal gap-3 justify-start items-start">
-            <div className="font-bold mb-6">Socials</div>
-            <a className="hover:underline" href="#" target="_blank">
+            <div className="font-bold mb-6">Social Media</div>
+            <a className="hover:underline" href="tiktok.com" target="_blank">
               Tiktok
             </a>
-            <a className="hover:underline" href="#" target="_blank">
+            <a className="hover:underline" href="instagram.com/fittmeall" target="_blank">
               Instagram
             </a>
-            <a className="hover:underline" href="#" target="_blank">
+            <a className="hover:underline" href="twitter.com" target="_blank">
               X
             </a>
-            <a className="hover:underline" href="#" target="_blank">
+            <a className="hover:underline" href="facebook.com" target="_blank">
               Facebook
             </a>
           </div>
@@ -148,10 +139,10 @@ const Footer = () => {
         </div>
         <div className="flex flex-row w-1/3 justify-end items-end gap-20">
           <a className="hover:underline" href="#" target="_blank">
-            Privacy & Policy
+            Kebijakan Privasi
           </a>
           <a className="hover:underline" href="#" target="_blank">
-            Terms & Condition
+            Syarat dan Ketentuan
           </a>
         </div>
       </div>

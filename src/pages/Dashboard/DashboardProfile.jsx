@@ -9,6 +9,7 @@ import {
   changePassword,
   editUserData,
   getUserData,
+  postPhotoProfile,
 } from "../../api/services/profile";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import DashboardMenu from "../../components/shared/DashboardMenu";
@@ -16,15 +17,19 @@ import DashboardMenu from "../../components/shared/DashboardMenu";
 const Dashboard = () => {
   const navigate = useNavigate();
 
+  const [isUploading, setIsUploading] = useState(false);
   const [isPasswordPopupVisible, setPasswordPopupVisible] = useState(false);
   const [isPasswordSuccessPopupVisible, setPasswordSuccessPopupVisible] =
     useState(false);
   const [isUbahPopupVisible, setUbahPopupVisible] = useState(false);
   const [isUbahStatusPopupVisible, setUbahStatusPopupVisible] = useState(false);
+  const [changePhotoPopUp, setChangePhotoPopUp] = useState(false);
+  const [changePhotoStatus, setChangePhotoStatus] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [userData, setUserData] = useState({
     userName: "",
     umur: 0,
@@ -33,6 +38,7 @@ const Dashboard = () => {
     tinggiBadan: 0,
     password: "",
     updatedAt: "",
+    photoLink: "",
   });
   const alamatOptions = [
     { value: "Sigura-gura", label: "Sigura-gura" },
@@ -80,6 +86,14 @@ const Dashboard = () => {
 
   const toggleUbahStatusPopup = () => {
     setUbahStatusPopupVisible(!isUbahStatusPopupVisible);
+  };
+
+  const toggleChangePhoto = () => {
+    setChangePhotoPopUp(!changePhotoPopUp);
+  };
+
+  const toggleChangePhotoStatus = () => {
+    setChangePhotoStatus(!changePhotoStatus);
   };
 
   const handleLogout = () => {
@@ -139,6 +153,12 @@ const Dashboard = () => {
         setTimeout(() => {
           togglePasswordSuccessPopup();
         }, 1000);
+      } else if (actionType === "photoUpload") {
+        console.log("Uploading photo...");
+        setIsUploading(true);
+        const response = await postPhotoProfile(selectedPhoto);
+        setChangePhotoPopUp(!changePhotoPopUp);
+        console.log("Photo changed successfully");
       } else {
         console.log("Invalid action type.");
       }
@@ -160,12 +180,18 @@ const Dashboard = () => {
           } else {
             setErrorMessage("An error occurred. Please try again.");
           }
+        } else if (actionType === "photoUpload") {
+          setErrorMessage(
+            "Error uploading photo. Please try again or contact developers!"
+          );
         } else {
           setErrorMessage("Network error. Please try again.");
         }
       } else {
         console.log("Invalid action type.");
       }
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -201,18 +227,25 @@ const Dashboard = () => {
             <DashboardMenu />
             <div className="flex flex-col w-full h-fit">
               <div className="flex w-full h-40 bg-ProfileHeader bg-top bg-no-repeat bg-cover" />
-              <div className="flex flex-row w-full mt-3 px-20 gap-8">
-                <div className="relative">
-                  <img
-                    className="-mt-16"
-                    src={PhotoProfileDummy}
-                    alt="profile picture"
-                  />
-                  <div className="absolute right-1 bottom-2">
-                    <SVGs.ChangePhoto />
+              <div className="flex flex-row w-full -mt-10 px-20 gap-8 justify-start items-center">
+                <div className="flex w-fit relative">
+                  <div className="flex w-40 h-40 bg-cust-orange-normal rounded-full justify-center items-center overflow-hidden">
+                    <img
+                      className="max-w-40 min-h-40 rounded-full"
+                      src={userData.photoLink}
+                      alt="profile picture"
+                    />
                   </div>
+                  <button
+                    className="absolute right-1 bottom-2"
+                    onClick={() => {
+                      toggleChangePhoto();
+                    }}
+                  >
+                    <SVGs.ChangePhoto />
+                  </button>
                 </div>
-                <div className="flex flex-col w-full gap-1">
+                <div className="flex flex-col w-3/4 gap-1">
                   <div className="font-bold text-cust-orange-normal text-3xl">
                     {userData.userName}
                   </div>
@@ -619,6 +652,58 @@ const Dashboard = () => {
             togglePasswordSuccessPopup;
             handleLogout();
           }}
+        />
+      )}
+
+      {changePhotoPopUp && (
+        <div className="fixed font-Poppins top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-10 backdrop-blur-sm">
+          <div className="flex flex-col w-1/3 bg-white drop-shadow-2xl rounded-xl justify-center items-center p-8 gap-4">
+            <div className="font-bold text-cust-orange-normal text-3xl">
+              Ganti Foto Profil
+            </div>
+            <div>Pilih foto yang ingin kamu gunakan</div>
+            <div className="flex justify-center items-center border-2 border-cust-orange-normal py-3 px-5 rounded-xl">
+              <input
+                className="w-full text-center"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setSelectedPhoto(e.target.files[0])}
+              />
+            </div>
+            {errorMessage && (
+              <div className="text-red-500 text-sm font-Poppins font-bold">
+                {errorMessage}
+              </div>
+            )}
+            <div className="flex flex-row justify-center items-center w-1/2 gap-3">
+              <Button
+                className={"w-1/2"}
+                type={"button"}
+                variation={"secondary-rectangle"}
+                onClick={() => toggleChangePhoto()}
+              >
+                Kembali
+              </Button>
+              <Button
+                className={"w-1/2"}
+                type={"submit"}
+                variation={"primary-rectangle"}
+                onClick={() => handleAction("photoUpload")}
+              >
+                Ubah
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {changePhotoStatus && (
+        <Dialogue
+          type={"success"}
+          title={"Berhasil"}
+          message={"Foto profil berhasil diubah"}
+          buttonLabel={"Kembali"}
+          onClick={() => window.location.reload()}
         />
       )}
     </div>

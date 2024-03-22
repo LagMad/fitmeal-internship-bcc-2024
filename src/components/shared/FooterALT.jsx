@@ -73,7 +73,7 @@ const FooterALT = ({ position }) => {
               onMouseEnter={() => handleHover("instagram", true)}
               onMouseLeave={() => handleHover("instagram", false)}
             >
-              <Button type={"button"} variation={"primary-round"} onClick={() => {window.open("https://www.instagram.com"), "_blank"}}>
+              <Button type={"button"} variation={"primary-round"} onClick={() => {window.open("https://www.instagram.com/fittmeall"), "_blank"}}>
                 <SVGs.Instagram
                   fillColor={isInstagramHovered ? custGreen : "white"}
                 />
@@ -105,10 +105,10 @@ const FooterALT = ({ position }) => {
         </div>
         <div className="flex flex-row w-1/3 justify-end items-end gap-20">
           <a className="hover:underline" href="#" target="_blank">
-            Privacy & Policy
+            Kebijakan Privasi
           </a>
           <a className="hover:underline" href="#" target="_blank">
-            Terms & Condition
+            Syarat dan Ketentuan
           </a>
         </div>
       </div>

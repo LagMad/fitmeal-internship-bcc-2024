@@ -8,7 +8,7 @@ const getUserData = async () => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }); 
+    });
     return response.data;
   } catch (error) {
     throw error;
@@ -47,7 +47,7 @@ const changePassword = async (oldPassword, newPassword, confirmPassword) => {
       {
         oldPassword,
         newPassword,
-        confirmPassword
+        confirmPassword,
       },
       {
         headers: {
@@ -88,17 +88,50 @@ const checkCodePassword = async (body) => {
 
 const forgotPassword = async (body) => {
   try {
-    const response = await axiosInstance.post("v1/user/forgot-password/change-password", {
-      email: body.email,
-      newPassword: body.newPassword,
-      confirmPassword: body.confirmPassword
-    })
-    return response.data
+    const response = await axiosInstance.post(
+      "v1/user/forgot-password/change-password",
+      {
+        email: body.email,
+        newPassword: body.newPassword,
+        confirmPassword: body.confirmPassword,
+      }
+    );
+    return response.data;
   } catch (error) {
-    console.log(error)
-    throw error
+    console.log(error);
+    throw error;
   }
-}
+};
 
+const postPhotoProfile = async (photoFile) => {
+  try {
+    const token = window.localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append("photo", photoFile);
 
-export { getUserData, editUserData, changePassword, getCodePassword, checkCodePassword, forgotPassword };
+    const response = await axiosInstance.post(
+      "v1/user/upload-photo",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error uploading photo:", error);
+    throw error;
+  }
+};
+
+export {
+  getUserData,
+  editUserData,
+  changePassword,
+  getCodePassword,
+  checkCodePassword,
+  forgotPassword,
+  postPhotoProfile,
+};

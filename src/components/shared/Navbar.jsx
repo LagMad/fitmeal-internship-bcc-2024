@@ -80,11 +80,21 @@ const Navbar = () => {
               Rencana Makan
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"} path={"/forumkomunitas"} onClick={() => navigate("/")}>
+            <Button
+              type={"button"}
+              variation={"tertiary-white"}
+              path={"/forumkomunitas"}
+              onClick={() => navigate("/")}
+            >
               Komunitas Sehat
             </Button>
 
-            <Button type={"button"} variation={"tertiary-white"} path={"/testimonial"} onClick={() => navigate("/")}>
+            <Button
+              type={"button"}
+              variation={"tertiary-white"}
+              path={"/testimonial"}
+              onClick={() => navigate("/")}
+            >
               Testimonial
             </Button>
           </div>
@@ -93,14 +103,20 @@ const Navbar = () => {
             {isAuthenticated ? (
               <div className="relative">
                 <button
-                  className="flex flex-row justify-center items-center gap-5 text-xl text-cust-orange-normal font-bold w-40 h-full overflow-hidden whitespace-nowrap"
+                  className="flex flex-row justify-center items-center gap-5 text-xl text-cust-orange-normal font-bold w-52 h-full overflow-hidden whitespace-nowrap"
                   onClick={toggleDropdown}
                 >
-                  <img className="" src={PhotoProfile} alt="profile" />
-                  <span className="truncate">{userData.userName}</span>
+                  <div className="flex w-12 h-12 bg-cust-orange-normal rounded-full justify-center items-center overflow-hidden">
+                    <img
+                      className="max-w-12"
+                      src={userData.photoLink}
+                      alt="profile"
+                    />
+                  </div>
+                  <span className="truncate max-w-32">{userData.userName}</span>
                 </button>
                 {isOpen && (
-                  <div className="absolute top-10 w-full left-0 mt-1 bg-transparent text-center">
+                  <div className="absolute top-[54px] w-full left-0 mt-1 bg-transparent text-center">
                     <ul className="flex flex-col w-full gap-1">
                       <li
                         className="w-full py-2 md:py-2.5 px-3 md:px-8 bg-cust-orange-normal hover:bg-white rounded-xl text-white hover:text-cust-orange-normal border-transparent border-2 hover:border-2 hover:border-cust-orange-normal font-semibold text-sm md:text-sm transition-colors duration-300"
