@@ -1,18 +1,5 @@
 import { axiosInstance } from "../coreApi";
 
-// const handleLogin = async (body) => {
-//   try {
-//     const response = await axiosInstance.post("v1/user/login", {
-//       email: body.email,
-//       password: body.password,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
 const handleLogin = async (body) => {
   try {
     const response = await axiosInstance.post("v1/user/login", {

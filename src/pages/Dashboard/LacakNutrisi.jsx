@@ -17,10 +17,17 @@ import Salad from "../../assets/Salad.png";
 import LacakNutrisiResult from "../../components/shared/LacakNutrisiResult";
 import Dialogue from "../../components/ui/Dialogue";
 import Foods from "../../assets/Foods1.png";
+import { payPremium } from "../../api/services/payment";
+import DagingPict from "../../assets/DagingPict.png";
+import NasiPict from "../../assets/NasiPict.png";
+import SayurPict from "../../assets/SayurPict.png";
+import FoodsOnTop from "../../assets/Foods2.png";
 
 const LacakNutrisi = () => {
   const navigate = useNavigate();
   const [isTambahNutrisiPopUp, setTambahNutrisiPopUpVisible] = useState(false);
+  const [isTambahNutrisiOptionPopUp, setTambahNutrisiOptionPopUp] =
+    useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     kalori: 0,
@@ -34,6 +41,11 @@ const LacakNutrisi = () => {
     protein: 0,
     karbohidrat: 0,
   });
+
+  const [paymentAmount, setPaymentAmount] = useState({
+    amount: 20000,
+  });
+
   const [userData, setUserData] = useState([]);
   const [mealData, setMealData] = useState([]);
   const [dailyNutritionData, setDailyNutritionData] = useState([]);
@@ -43,6 +55,16 @@ const LacakNutrisi = () => {
   const [isLanjutClicked, setIsLanjutClicked] = useState(false);
   const [isStatusDialogue, setIsStatusDialogue] = useState(false);
   const [isPremiumPopUp, setIsPremiumPopUp] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [timeDataPagi, setTimeDataPagi] = useState({
+    time: "",
+  });
+  const [timeDataSiang, setTimeDataSiang] = useState({
+    time: "",
+  });
+  const [timeDataMalam, setTimeDataMalam] = useState({
+    time: "",
+  });
 
   const getUser = async () => {
     try {
@@ -66,7 +88,6 @@ const LacakNutrisi = () => {
   const getDailyNutrition = async () => {
     try {
       const response = await getDailyNutritionData();
-      console.log("daily nutrition", response.data);
       setDailyNutritionData(response.data);
     } catch (error) {
       console.log(error);
@@ -78,6 +99,17 @@ const LacakNutrisi = () => {
       console.log("Performing tambah nutrisi...");
       const response = await tambahNutrisi(mealFormData);
       toggleStatusDialoguePopUp();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlePayPremium = async () => {
+    try {
+      console.log("Performing premium...");
+      const response = await payPremium(paymentAmount);
+      console.log(response.data.snapUrl);
+      console.log("handlePayPremium Success");
     } catch (error) {
       console.log(error);
     }
@@ -111,6 +143,10 @@ const LacakNutrisi = () => {
     setTambahNutrisiPopUpVisible(!isTambahNutrisiPopUp);
   };
 
+  const toggleTambahNutrisiOptionPopUp = () => {
+    setTambahNutrisiOptionPopUp(!isTambahNutrisiOptionPopUp);
+  };
+
   const toggleStatusDialoguePopUp = () => {
     setTambahNutrisiPopUpVisible(!isTambahNutrisiPopUp);
     setIsStatusDialogue(!isStatusDialogue);
@@ -134,18 +170,36 @@ const LacakNutrisi = () => {
     setIsLanjutClicked(true);
   };
 
+  const timeOptionsPagi = [
+    { value: "07.00", label: "07.00" },
+    { value: "07.30", label: "07.30" },
+    { value: "08.00", label: "08.00" },
+  ];
+
+  const timeOptionsSiang = [
+    { value: "11.00", label: "11.00" },
+    { value: "11.30", label: "11.30" },
+    { value: "12.00", label: "12.00" },
+  ];
+
+  const timeOptionsMalam = [
+    { value: "18.00", label: "18.00" },
+    { value: "18.30", label: "18.30" },
+    { value: "19.00", label: "19.00" },
+  ];
+
   return (
     <div>
       <DashboardLayout>
-        <div className="flex flex-col mx-32 gap-5 mb-10 z-0 font-Poppins">
+        <div className="flex flex-col h-full mx-32 gap-5 mb-10 z-0 font-Poppins">
           <div className="ml-[88px] font-normal text-cust-orange-normal text-xl">
             Lacak Nutrisi
           </div>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-row h-full gap-5">
             <DashboardMenu />
-            <div className="flex flex-row w-full h-fit gap-8 justify-center items-start">
-              <div className="flex flex-col w-1/4 gap-10">
-                <div className="flex flex-col w-full justify-center bg-white drop-shadow-xl rounded-lg h-fit px-8 py-8 gap-8">
+            <div className="flex flex-row w-full h-full gap-8 justify-center items-start">
+              <div className="flex flex-col w-1/4 h-full gap-10">
+                <div className="flex flex-col w-full h-1/2 justify-center bg-white drop-shadow-xl rounded-lg px-8 py-8 gap-8">
                   <div className="flex flex-row justify-between items-center">
                     <SVGs.Kalori />
                     <div className="font-normal text-cust-orange-normal text-6xl">
@@ -155,43 +209,30 @@ const LacakNutrisi = () => {
                   <div className="flex font-bold text-cust-orange-normal text-5xl justify-center items-center text-center">
                     {Math.round(userData.kalori)} KKal
                   </div>
-                  <div className="flex w-full font-normal text-cust-orange-normal text-2xl">
-                    {Math.round(dailyNutritionData.kalori)}/
-                    {Math.round(userData.kalori)}
-                  </div>
+                  {Math.round(dailyNutritionData.kalori) >=
+                  Math.round(userData.kalori) ? (
+                    <div className="flex flex-row justify-start items-center gap-2">
+                      <SVGs.CheckCircle />
+                      <div className="font-bold text-xs text-cust-green-normal">
+                        Completed
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex w-full font-normal text-cust-orange-normal text-2xl">
+                      {Math.round(dailyNutritionData.kalori)}/
+                      {Math.round(userData.kalori)}
+                    </div>
+                  )}
 
                   <Button
                     type={"button"}
                     variation={"primary-rectangle"}
-                    onClick={() => toggleTambahNutrisiPopUp()}
+                    onClick={() => toggleTambahNutrisiOptionPopUp()}
                   >
                     Tambah
                   </Button>
                 </div>
-                <div className="flex flex-col w-full h-fit p-5 justify-between items-center bg-cust-orange-normal rounded-xl gap-4">
-                  <div className="flex flex-row w-full justify-start items-center gap-3">
-                    <SVGs.Lock fillColor={"white"} width={"18"} height={"18"} />
-                    <div className="text-white text-sm font-normal">
-                      Konten Premium
-                    </div>
-                  </div>
-                  <div className="flex flex-row w-full justify-between items-center">
-                    <div className="flex flex-row w-full justify-start items-center gap-3">
-                      <SVGs.TimeFilled width={"26"} />
-                      <div className="text-white font-bold text-lg">
-                        Atur Jadwal Makan
-                      </div>
-                    </div>
-                    <div className="flex justify-end items-center">
-                      <SVGs.RightArrow
-                        fillColor={"white"}
-                        width={"20"}
-                        height={"20"}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col w-full h-fit justify-center items-center bg-white border-2 border-cust-black-light rounded-lg p-3 gap-2">
+                <div className="flex flex-col w-full h-1/2 justify-center items-center bg-white border-2 border-cust-black-light rounded-lg p-3 gap-2">
                   <div className="flex flex-row w-full justify-center items-center gap-3">
                     <SVGs.Lock
                       fillColor={"#FA6815"}
@@ -303,30 +344,152 @@ const LacakNutrisi = () => {
                     />
                   </div>
                 </div>
-                {/* <div className="flex flex-col w-full h-fit p-5 justify-center items-center bg-cust-orange-normal rounded-xl gap-4">
-                  <div className="flex flex-row w-full justify-start items-center gap-3">
-                    <SVGs.Lock fillColor={"white"} width={"25"} height={"25"} />
-                    <div className="text-white text-lg font-normal">
-                      Konten Premium
-                    </div>
-                  </div>
-                  <div className="flex flex-row w-full justify-between items-center">
-                    <div className="flex flex-row w-1/2 justify-start items-center gap-5">
-                      <SVGs.TimeFilled />
-                      <div className="text-white font-bold text-2xl">
-                        Atur Jadwal Makan
+                <div className="flex flex-col">
+                  <div className="flex flex-col w-full h-fit p-5 justify-center items-center bg-cust-orange-normal rounded-t-xl gap-4">
+                    <div className="flex flex-row w-full justify-start items-center gap-3">
+                      <SVGs.Lock
+                        fillColor={"white"}
+                        width={"25"}
+                        height={"25"}
+                      />
+                      <div className="text-white text-lg font-normal">
+                        Konten Premium
                       </div>
                     </div>
-                    <div className="flex w-1/2 justify-end items-center">
-                      <SVGs.RightArrow fillColor={"white"} width={"20"} height={"20"}/>
+                    <div className="flex flex-row w-full justify-between items-center">
+                      <div className="flex flex-row w-1/2 justify-start items-center gap-5">
+                        <SVGs.TimeFilled width={"32"} height={"32"} />
+                        <div className="text-white font-bold text-2xl">
+                          Atur Pengingat Makan
+                        </div>
+                      </div>
+                      <div className="flex w-1/2 justify-end items-center">
+                        <SVGs.RightArrow
+                          fillColor={"white"}
+                          width={"20"}
+                          height={"20"}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex text-white text-left self-start">
+                      Pengingat makan sesuai dengan jadwal yang kamu tentukan
                     </div>
                   </div>
-                </div> */}
+                  <div className="flex flex-row w-full h-fit justify-center items-center p-5 gap-5 bg-white rounded-xl border-l-[1.5px] border-r-[1.5px] border-b-[1.5px]">
+                    <div className="flex flex-col w-1/3 gap-3">
+                      <div className="text-cust-orange-normal text-2xl font-bold">
+                        Makan Pagi
+                      </div>
+                      <Input
+                        type={"select"}
+                        name={"time"}
+                        placeholder={"Pilih jam"}
+                        options={timeOptionsPagi}
+                        onChange={(e) =>
+                          setTimeDataPagi({
+                            ...timeDataPagi,
+                            time: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/3 gap-3">
+                      <div className="text-cust-orange-normal text-2xl font-bold">
+                        Makan Siang
+                      </div>
+                      <Input
+                        type={"select"}
+                        name={"time"}
+                        placeholder={"Pilih jam"}
+                        options={timeOptionsSiang}
+                        onChange={(e) =>
+                          setTimeDataSiang({
+                            ...timeDataSiang,
+                            time: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/3 gap-3">
+                      <div className="text-cust-orange-normal text-2xl font-bold">
+                        Makan Malam
+                      </div>
+                      <Input
+                        type={"select"}
+                        name={"time"}
+                        placeholder={"Pilih jam"}
+                        options={timeOptionsMalam}
+                        onChange={(e) =>
+                          setTimeDataMalam({
+                            ...timeDataMalam,
+                            time: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </DashboardLayout>
+      {isTambahNutrisiOptionPopUp && (
+        <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-10 backdrop-blur-sm font-Poppins">
+          <div className="flex flex-col w-[675px] bg-white drop-shadow-2xl rounded-xl justify-center items-center p-8 gap-3">
+            <div className="font-bold text-3xl text-cust-orange-normal self-start">
+              Tambah Nutrisi
+            </div>
+            <div className="flex flex-row text-left justify-start self-start">
+              Tambah capaian nutrisi harian kamu sesuai dengan makananmu
+            </div>
+            <div className="flex flex-row justify-center items-center w-full gap-5">
+              <button
+                className="flex flex-col justify-center items-center gap-5 w-1/2 h-72 border-[1.5px] border-cust-black-light p-5 rounded-xl"
+                onClick={() => {
+                  toggleTambahNutrisiOptionPopUp();
+                  toggleTambahNutrisiPopUp();
+                }}
+              >
+                <div className="font-semibold text-xl text-cust-orange-normal">
+                  Tambah Makanan
+                </div>
+                <div className="flex flex-row justify-center items-center gap-2">
+                  <img src={DagingPict} />
+                  <img src={NasiPict} />
+                  <img src={SayurPict} />
+                </div>
+                <div className="text-center">
+                  Tambah makanan secara manual untuk Lacak Nutrismu
+                </div>
+              </button>
+              <button className="flex flex-col justify-center items-center text-center gap-5 w-1/2 h-72 bg-cust-orange-normal rounded-xl p-5">
+                <div className="flex flex-row w-full justify-center items-center gap-3">
+                  <SVGs.Lock fillColor={"white"} width={"20"} height={"20"} />
+                  <div className="text-white text-sm font-normal">
+                    Konten Premium
+                  </div>
+                </div>
+                <div className="font-semibold text-white text-xl">
+                  Tambah Paket Makanan Pribadi
+                </div>
+                <img src={FoodsOnTop} />
+                <div className="text-white">
+                  Tambahkan paket pribadimu untuk Lacak Nutrisi secara otomatis
+                </div>
+              </button>
+            </div>
+            <Button
+              className={"w-full"}
+              type={"button"}
+              variation={"secondary-rectangle"}
+              onClick={() => toggleTambahNutrisiOptionPopUp()}
+            >
+              Batal
+            </Button>
+          </div>
+        </div>
+      )}
       {isTambahNutrisiPopUp && (
         <div className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-10 backdrop-blur-sm font-Poppins">
           <div className="flex flex-col w-1/4 bg-white drop-shadow-2xl rounded-xl justify-center items-center p-8 gap-8">
@@ -348,7 +511,7 @@ const LacakNutrisi = () => {
                   <div className="text-cust-black-light-active">
                     Pilih makanan
                   </div>
-                  <div className="flex flex-col gap-5 w-full">
+                  <div className="flex flex-col gap-5 w-full max-h-44 overflow-y-scroll">
                     {filteredMealData.map((meal, index) => (
                       <LacakNutrisiResult
                         key={index}
@@ -496,7 +659,7 @@ const LacakNutrisi = () => {
                 Beragam keuntungan untuk mendukung hidup sehatmu
               </div>
               <div className="flex flex-row justify-center items-center">
-                <span className="text-5xl text-cust-orange-normal">
+                <span className="text-5xl text-cust-orange-normal font-bold">
                   Rp 20.000
                 </span>{" "}
                 <span className="text-2xl text-cust-black-light-active">
@@ -507,12 +670,13 @@ const LacakNutrisi = () => {
                 className={"w-full"}
                 type={"button"}
                 variation={"primary-rectangle"}
+                onClick={() => handlePayPremium()}
               >
                 Mulai Premium
               </Button>
             </div>
             <div
-              className="flex flex-col w-1/2 bg-cust-green-light justify-start items-start py-16 px-10 gap-5"
+              className="flex flex-col w-1/2 bg-cust-green-light justify-start items-start py-28 px-10 gap-2"
               style={{ height: "100%" }}
             >
               <div className="font-bold text-cust-orange-normal text-xl">
@@ -520,19 +684,15 @@ const LacakNutrisi = () => {
               </div>
               <div className="flex flex-row w-full justify-start items-center gap-3 h-10">
                 <SVGs.CheckCircle />
-                Ragam nutrisi lebih banyak
+                Nutrisi lebih beragam
               </div>
               <div className="flex flex-row w-full justify-start items-center gap-3 h-10">
                 <SVGs.CheckCircle className={"w-max"} />
-                Program makan sesuai kalori dan nutrisi
+                Buat paket makanan sesuai keinginan
               </div>
               <div className="flex flex-row w-full justify-start items-center gap-3 h-10">
                 <SVGs.CheckCircle />
-                Tambah makan dari catering
-              </div>
-              <div className="flex flex-row w-full justify-start items-center gap-3 h-10">
-                <SVGs.CheckCircle />
-                Catat air Anda
+                Pengingat makan
               </div>
             </div>
           </div>

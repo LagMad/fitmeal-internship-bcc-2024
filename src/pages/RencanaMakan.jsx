@@ -152,7 +152,9 @@ const RencanaMakan = () => {
   };
 
   const handleDeleteSelectedPackage = (index) => {
-    const updatedSelectedPackages = selectedPackages.filter((_, i) => i !== index);
+    const updatedSelectedPackages = selectedPackages.filter(
+      (_, i) => i !== index
+    );
     setSelectedPackages(updatedSelectedPackages);
   };
 
@@ -302,7 +304,7 @@ const RencanaMakan = () => {
             onChange={(e) =>
               setFormData({ ...formData, paket: e.target.value })
             }
-            required
+            required={true}
             placeholder="Pilih jenis paket kamu"
             options={paketOptions}
           />
@@ -335,9 +337,7 @@ const RencanaMakan = () => {
               )
             ) : (
               <div className="flex flex-col w-full justify-center items-center text-cust-black-light-active border-l-[1.5px] border-r-[1.5px] border-b-[1.5px] border-cust-black-light py-5 px-4 gap-3">
-                <div className="text-2xl">
-                  Paket Makan Belum Tersedia
-                </div>
+                <div className="text-2xl">Paket Makan Belum Tersedia</div>
                 <div className="text-lg">
                   Harap pilih jenis paket terlebih dahulu
                 </div>

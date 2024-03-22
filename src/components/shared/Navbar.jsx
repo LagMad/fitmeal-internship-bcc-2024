@@ -81,7 +81,7 @@ const Navbar = () => {
             </Button>
 
             <Button type={"button"} variation={"tertiary-white"} path={"/forumkomunitas"} onClick={() => navigate("/")}>
-              Forum Komunitas
+              Komunitas Sehat
             </Button>
 
             <Button type={"button"} variation={"tertiary-white"} path={"/testimonial"} onClick={() => navigate("/")}>
