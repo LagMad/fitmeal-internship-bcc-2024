@@ -245,15 +245,24 @@ const LacakNutrisi = () => {
                 </div>
                 <div className="flex relative w-full h-full">
                   <div className="flex absolute w-[calc(100%+50px)] h-[calc(100%+50px)] bg-opacity-20 backdrop-blur-md -top-[25px] -left-[25px] justify-center items-center">
-                    <button
-                      className="flex flex-row bg-white rounded-lg py-2 px-7 justify-center items-center gap-5 drop-shadow-2xl"
+                    <div
+                      className="flex flex-col bg-white rounded-lg py-3 px-7 justify-center items-center gap-5 drop-shadow-2xl"
                       onClick={() => setIsPremiumPopUp(true)}
                     >
-                      <SVGs.Lock fillColor={"#FA6815"} width={"30"} />
-                      <div className="font-bold text-cust-orange-normal text-3xl">
-                        Konten Premium
+                      <div className="flex flex-row gap-5 justify-center items-center">
+                        <SVGs.Lock fillColor={"#FA6815"} width={"30"} />
+                        <div className="font-bold text-cust-orange-normal text-3xl">
+                          Konten Premium
+                        </div>
                       </div>
-                    </button>
+                      <Button
+                        className={"w-full text-xl"}
+                        type={"button"}
+                        variation={"primary-rectangle"}
+                      >
+                        Daftar Premium
+                      </Button>
+                    </div>
                   </div>
                   <div className="grid grid-cols-3 w-full gap-12">
                     <NutrisiCard
