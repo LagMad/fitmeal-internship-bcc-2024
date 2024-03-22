@@ -14,6 +14,7 @@ const LupaPassword1 = ({ nextStep }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Verifying email and getting code...")
       const response = await getCodePassword(formData);
       nextStep(formData.email)
     } catch (error) {

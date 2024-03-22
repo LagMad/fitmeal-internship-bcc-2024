@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Button from "../ui/Button";
-import PhotoProfile from "../../assets/PhotoProfile.png";
-import SVGs from "./SVGs";
 import Dialogue from "../ui/Dialogue";
 import { getUserData } from "../../api/services/profile";
 
@@ -36,7 +34,6 @@ const Navbar = () => {
   };
 
   const handleLogout = (e) => {
-    // e.preventDefault();
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userId");
     window.location.reload();

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { checkCodePassword } from "../../api/services/profile";
@@ -6,11 +6,12 @@ import { checkCodePassword } from "../../api/services/profile";
 const LupaPassword2 = ({ nextStep, email, prevStep }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
-    email: email, // Initialize email field
-    kode: ["", "", "", ""], // Initialize kode as an array of strings
+    email: email,
+    kode: ["", "", "", ""],
   });
 
   const inputRefs = useRef([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -22,20 +23,17 @@ const LupaPassword2 = ({ nextStep, email, prevStep }) => {
       const response = await checkCodePassword(formDataToSend);
       nextStep(email);
     } catch (error) {
-      // Error handling code remains the same
+      throw error;
     }
   };
 
-  // Update the kode value in formData on input change
   const handleKodeChange = (index, value) => {
-    // Ensure value is only a single digit character
     value = value.slice(0, 1);
-  
+
     const updatedKode = [...formData.kode];
-    updatedKode[index] = value; // Update the value directly as strings
+    updatedKode[index] = value;
     setFormData({ ...formData, kode: updatedKode });
-  
-    // Move focus to the next input field if available
+
     if (value.length === 1 && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus();
     }
@@ -60,14 +58,11 @@ const LupaPassword2 = ({ nextStep, email, prevStep }) => {
             type="text"
             maxLength={1}
             onChange={(e) => handleKodeChange(index, e.target.value)}
-            value={formData.kode[index]} // Bind value from state
-            ref={(el) => (inputRefs.current[index] = el)} // Assign ref to input
+            value={formData.kode[index]}
+            ref={(el) => (inputRefs.current[index] = el)}
             required={true}
           />
         ))}
-      </div>
-      <div className="text-center text-cust-black-light-active">
-        Kirim ulang kode verifikasi 0:54
       </div>
       <Button type={"submit"} variation={"primary-rectangle"}>
         Lanjut

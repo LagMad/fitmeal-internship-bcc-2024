@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "../ui/SearchBar";
 import SVGs from "./SVGs";
-import PhotoProfile from "../../assets/PhotoProfile.png";
 import Dialogue from "../ui/Dialogue";
 import { useNavigate } from "react-router-dom";
 import { getUserData } from "../../api/services/profile";
@@ -29,7 +27,6 @@ const NavbarDashboard = () => {
   };
 
   const handleLogout = (e) => {
-    // e.preventDefault();
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("userId");
     setTimeout(() => {

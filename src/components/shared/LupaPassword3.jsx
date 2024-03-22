@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import LoginForm from "../auth/LoginForm";
-import FooterALT from "./FooterALT";
 import { useNavigate } from "react-router-dom";
-import LoginPict from "../../assets/LoginPict.png";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
-import { handleLogin } from "../../api/services/auth";
-import { changePassword, forgotPassword } from "../../api/services/profile";
+import { forgotPassword } from "../../api/services/profile";
 import Dialogue from "../ui/Dialogue";
 
 const LupaPassword3 = ({ email }) => {

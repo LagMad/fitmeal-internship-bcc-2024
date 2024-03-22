@@ -22,7 +22,7 @@ const Register2 = ({ nextStep, Form, setForm }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Prevent default form submission behavior
+      e.preventDefault();
       handleNextStep();
     }
   };

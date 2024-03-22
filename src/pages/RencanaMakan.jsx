@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import MainLayout from "../components/layout/MainLayout";
-
-import Restaurant1 from "../assets/Restaurant1.png";
 import SVGs from "../components/shared/SVGs";
-import Foods from "../assets/Foods.png";
 import SearchBar from "../components/ui/SearchBar";
 import PaketMenuCard from "../components/shared/PaketMenuCard";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import RestoranCard from "../components/shared/RestoranCard";
-import BlankSpacePlaceholder from "../components/shared/BlankSpaceHolder";
 import PaketMenuCardSelected from "../components/shared/PaketMenuCardSelected";
 
 const RencanaMakan = () => {
@@ -242,29 +238,6 @@ const RencanaMakan = () => {
                 <button onClick={() => goToNextCards()}>
                   <SVGs.RightArrowCircle fillColor={orange} width={50} />
                 </button>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col gap-5 w-full">
-            <div className="text-cust-orange-normal text-3xl font-bold">
-              Rekomendasi Program Makanan
-            </div>
-            <div className="flex flex-col gap-5 w-full bg-cust-orange-normal text-white py-5 px-6 rounded-2xl">
-              <div className="flex flex-row justify-start items-center w-full gap-4">
-                <SVGs.Lock fillColor={white} width={23} height={23} />
-                <div className="font-normal">Konten Premium</div>
-              </div>
-              <img className="" src={Foods} alt="foods" />
-              <div className="flex flex-row justify-start items-center gap-4">
-                <SVGs.Date width={23} height={23} />
-                30 Hari Paket Makanan
-              </div>
-              <div className="text-3xl font-bold">Program Diet</div>
-              <div className="text-[14px] font-normal">
-                Program makan diet 30 hari membantu pengguna merencanakan dan
-                melacak pola makan sehat selama periode 30 hari untuk mencapai
-                tujuan penurunan berat badan dan perubahan gaya hidup yang lebih
-                sehat
               </div>
             </div>
           </div>

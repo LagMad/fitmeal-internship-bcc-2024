@@ -33,7 +33,7 @@ const Dialogue = ({
         </div>
         <div className="text-center justify-center items-center">
           <div className="text-xl">{message}</div>
-          <div>{subMessage}</div> {/* Render subMessage as JSX */}
+          <div>{subMessage}</div>
         </div>
         <div className="flex flex-row w-full justify-center items-center gap-3">
           {type === "warning" ? (

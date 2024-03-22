@@ -11,7 +11,7 @@ const NutrisiCard = ({ icon, title, current, goals, className }) => {
       case "protein":
         return <SVGs.Protein />;
       default:
-        return null; // return null if no icon matches
+        return null;
     }
   };
 
